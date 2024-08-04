@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MVC3.Models.Vacancy>
+
+@{
+    ViewData["Title"] = "Vacancies";
+}
+
+<h1>Vacancies</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Vacancy Name
+                </th>
+                <th>
+                    Total Vacancy Count
+                </th>
+                <th>
+                    Active
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Projects
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VacancyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalVacancyCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Active)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title.TitleName)
+                    </td>
+                    <td>
+                        @if (item.Projects != null && item.Projects.Any())
+                        {
+                            <ul>
+                                @foreach (var project in item.Projects)
+                                {
+                                    <li>@project.ProjectName</li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <span>No projects</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.VacancyId" class="btn btn-warning btn-sm">Edit</a> 
+                        <a asp-action="Details" asp-route-id="@item.VacancyId" class="btn btn-info btn-sm">Details</a> 
+                        <a asp-action="Delete" asp-route-id="@item.VacancyId" class="btn btn-danger btn-sm">Delete</a>
+                        @* <a href="@Url.Action("View_Submissions", "VacancyApplicants", new { vacancyId = item.VacancyId })" class="btn btn-primary btn-sm">View Submissions</a> *@
+                        <a href="#" class="btn btn-primary btn-sm" onclick="return false;">View Submissions</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .btn-pink {
+        background-color: pink;
+        color: white;
+    }
+</style>

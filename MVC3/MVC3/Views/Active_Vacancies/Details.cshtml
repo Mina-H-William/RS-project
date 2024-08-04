@@ -1,0 +1,52 @@
+﻿ @model MVC3.Models.Vacancy
+
+@{
+    ViewData["Title"] = "Details";
+    var vacancyId = Model.VacancyId;
+}
+
+<h1>Details for Vacancy @vacancyId</h1>
+
+<div>
+    <h4>Vacancy</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Vacancy Name
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VacancyName)
+        </dd>
+        <dt class="col-sm-2">
+            Total Vacancy Count
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalVacancyCount)
+        </dd>
+        <dt class="col-sm-2">
+            Title Name
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title.TitleName)
+        </dd>
+        <dt class="col-sm-2">
+            Active
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+        <dt class="col-sm-2">
+            Projects
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var project in Model.VacancyProjects.Select(vp => vp.Project))
+            {
+                <p>@project.ProjectName</p>
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-controller="New_Applicants" asp-action="Create" asp-route-vacancyId="@Model.VacancyId">Apply</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

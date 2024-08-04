@@ -1,0 +1,52 @@
+﻿@model MVC3.Models.VacancyApplicant
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Vacancy Applicant</h1>
+
+<h4>Vacancy Applicant Details</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" name="vacancyId" value="@ViewBag.VacancyId" />
+            <input type="hidden" name="applicantId" value="@ViewBag.ApplicantId" />
+
+            <div class="form-group">
+                <label class="control-label">Expected Salary</label>
+                <input asp-for="ExpectedSalary" class="form-control" />
+                <span asp-validation-for="ExpectedSalary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">How Did You Hear About This Vacancy?</label>
+                <input asp-for="HearAboutVacancy" class="form-control" />
+                <span asp-validation-for="HearAboutVacancy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Have You Worked at This Company Before?</label>
+                <input asp-for="WorkAtCompany" class="form-control" />
+                <span asp-validation-for="WorkAtCompany" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Do You Have Any Relatives at This Company?</label>
+                <input asp-for="RelativeAtCompany" class="form-control" />
+                <span asp-validation-for="RelativeAtCompany" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Location</label>
+                <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

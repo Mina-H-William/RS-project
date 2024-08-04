@@ -1,0 +1,84 @@
+﻿@model IEnumerable<MVC3.Models.SubmissionViewModel>
+
+@{
+    ViewData["Title"] = "View Submissions";
+    var vacancyId = ViewBag.VacancyId;
+}
+
+<h1>Submissions for Vacancy @vacancyId</h1>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Years of Experience</th>
+                <th>CV</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ApplicantFirstName</td>
+                    <td>@item.ApplicantLastName</td>
+                    <td>@item.YearsOfExperience</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ResumeFilePath))
+                        {
+                            <a href="@Url.Content(item.ResumeFilePath)" target="_blank">View CV</a>
+                        }
+                        else
+                        {
+                            <a>
+                                No CV Available
+                            </a>
+                            }
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.ApplicantId })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ApplicantId })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ApplicantId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .table-responsive {
+        overflow-x: auto;
+        overflow-y: auto; /* Add vertical overflow */
+        max-height: 600px; /* Adjust height as needed */
+    }
+
+    .table {
+        border-collapse: collapse; /* Ensure borders and spacing are consistent */
+        width: 100%;
+    }
+
+    thead th {
+        position: sticky;
+        top: 0;
+        background-color: #f9f9f9; /* Adjust background color */
+        z-index: 2; /* Ensure headers are above other content */
+        border-bottom: 2px solid #ddd; /* Optional: add a border for visual separation */
+    }
+
+    tbody td {
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    /* Add spacing between action links */
+    .table td a {
+        margin-right: 10px; /* Adjust this value as needed */
+    }
+
+        /* Remove margin from the last link */
+        .table td a:last-child {
+            margin-right: 0;
+        }
+</style>

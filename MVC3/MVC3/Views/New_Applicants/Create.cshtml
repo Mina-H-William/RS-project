@@ -1,0 +1,458 @@
+﻿@* @model MVC3.Models.Applicant
+
+@{
+    ViewData["Title"] = "Create";
+    var vacancyId = ViewBag.VacancyId;
+    var existingApplicantId = ViewBag.ExistingApplicantId;
+}
+
+<h1>Create Applicant for Vacancy @vacancyId</h1>
+
+<h4>Applicant</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" name="vacancyId" value="@ViewBag.VacancyId" />
+
+            <div class="form-group">
+                <label class="control-label">First Name</label>
+                <input asp-for="ApplicantFirstName" class="form-control" id="ApplicantFirstName" />
+                <span asp-validation-for="ApplicantFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Middle Name</label>
+                <input asp-for="ApplicantMiddleName" class="form-control" id="ApplicantMiddleName" />
+                <span asp-validation-for="ApplicantMiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Last Name</label>
+                <input asp-for="ApplicantLastName" class="form-control" id="ApplicantLastName" />
+                <span asp-validation-for="ApplicantLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Date of Birth</label>
+                <input asp-for="DateOfBirth" class="form-control" id="DateOfBirth" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email Address</label>
+                <input asp-for="EmailAddress" class="form-control" id="emailAddress" />
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Contact Number</label>
+                <input asp-for="ContactNumber" class="form-control" id="contactNumber" />
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Home Address 1</label>
+                <input asp-for="HomeAddress1" class="form-control" id="HomeAddress1" />
+                <span asp-validation-for="HomeAddress1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Address 2</label>
+                <input asp-for="Address2" class="form-control" id="Address2" />
+                <span asp-validation-for="Address2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Nationality</label>
+                <select asp-for="Nationality" class="form-control select2">
+                    <option value="EG">Egyptian</option>
+                    <option value="US">American</option>
+                    <option value="GB">British</option>
+                    <option value="CA">Canadian</option>
+                    <option value="AU">Australian</option>
+                    <option value="FR">French</option>
+                    <option value="DE">German</option>
+                    <option value="IT">Italian</option>
+                    <option value="ES">Spanish</option>
+                    <option value="BR">Brazilian</option>
+                    <option value="IN">Indian</option>
+                    <option value="CN">Chinese</option>
+                    <option value="JP">Japanese</option>
+                </select>
+                <span asp-validation-for="Nationality" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Gender</label>
+                <input asp-for="Gender" class="form-control" id="Gender" />
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Military Status</label>
+                <input asp-for="MilitaryStatus" class="form-control" id="MilitaryStatus" />
+                <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Marital Status</label>
+                <input asp-for="MaritalStatus" class="form-control" id="MaritalStatus" />
+                <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Certificate Name</label>
+                <input asp-for="CertificateName" class="form-control" id="CertificateName" />
+                <span asp-validation-for="CertificateName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Graduation Year</label>
+                <input asp-for="GraduationYear" class="form-control" id="GraduationYear" />
+                <span asp-validation-for="GraduationYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Major</label>
+                <input asp-for="Major" class="form-control" id="Major" />
+                <span asp-validation-for="Major" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">University</label>
+                <input asp-for="University" class="form-control" id="University" />
+                <span asp-validation-for="University" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Current Employer</label>
+                <input asp-for="CurrentEmployer" class="form-control" id="CurrentEmployer" />
+                <span asp-validation-for="CurrentEmployer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Current Position</label>
+                <input asp-for="CurrentPosition" class="form-control" id="CurrentPosition" />
+                <span asp-validation-for="CurrentPosition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Current Salary</label>
+                <input asp-for="CurrentSalary" class="form-control" id="CurrentSalary" />
+                <span asp-validation-for="CurrentSalary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Years of Experience</label>
+                <input asp-for="YearsOfExperience" class="form-control" id="YearsOfExperience" />
+                <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Notice Period</label>
+                <input asp-for="NoticePeriod" class="form-control" id="NoticePeriod" />
+                <span asp-validation-for="NoticePeriod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Extra Certificates</label>
+                <input asp-for="ExtraCertificates" class="form-control" id="ExtraCertificates" />
+                <span asp-validation-for="ExtraCertificates" class="text-danger"></span>
+            </div>
+            <!-- Add file upload field -->
+            <div class="form-group">
+                <label asp-for="ResumeFilePath" class="control-label">Upload Resume</label>
+                <input type="file" name="ResumeFile" class="form-control" />
+                <span asp-validation-for="ResumeFilePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" id="createButton" />
+                <button id="redirectToVacancyApplicantCreate" class="btn btn-success" style="display: none;">Continue to Vacancy Applicant</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2({
+                placeholder: "Select Nationality",
+                allowClear: true
+            });
+        });
+        $(document).ready(function () {
+            function checkApplicant() {
+                var email = $('#emailAddress').val();
+                var phoneNumber = $('#contactNumber').val();
+
+                if (email && phoneNumber) {
+                    $.ajax({
+                        url: '@Url.Action("CheckExistingApplicant", "New_Applicants")',
+                        type: 'POST',
+                        data: { email: email, phoneNumber: phoneNumber },
+                        success: function (data) {
+                            if (data) {
+                                if (confirm('An applicant with this email and phone number already exists. Would you like to auto-fill the form with their information?')) {
+                                    $('#ApplicantFirstName').val(data.applicantFirstName);
+                                    $('#ApplicantMiddleName').val(data.applicantMiddleName);
+                                    $('#ApplicantLastName').val(data.applicantLastName);
+                                    $('#DateOfBirth').val(data.dateOfBirth);
+                                    $('#HomeAddress1').val(data.homeAddress1);
+                                    $('#Address2').val(data.address2);
+                                    $('#Nationality').val(data.nationality);
+                                    $('#Gender').val(data.gender);
+                                    $('#MilitaryStatus').val(data.militaryStatus);
+                                    $('#MaritalStatus').val(data.maritalStatus);
+                                    $('#CertificateName').val(data.certificateName);
+                                    $('#GraduationYear').val(data.graduationYear);
+                                    $('#Major').val(data.major);
+                                    $('#University').val(data.university);
+                                    $('#CurrentEmployer').val(data.currentEmployer);
+                                    $('#CurrentPosition').val(data.currentPosition);
+                                    $('#CurrentSalary').val(data.currentSalary);
+                                    $('#YearsOfExperience').val(data.yearsOfExperience);
+                                    $('#NoticePeriod').val(data.noticePeriod);
+                                    $('#ExtraCertificates').val(data.extraCertificates);
+                                    // Hide the create button and show the continue button
+                                    $('#createButton').hide();
+                                    $('#redirectToVacancyApplicantCreate').show().off('click').on('click', function () {
+                                        window.location.href = '@Url.Action("RedirectToVacancyApplicantCreate", "New_Applicants")?applicantId=' + data.applicantId + '&vacancyId=' + @vacancyId;
+                                    });
+                                }
+                            }
+                        },
+                        error: function () {
+                            console.error('Error checking existing applicant');
+                        }
+                    });
+                }
+            }
+
+            $('#emailAddress, #contactNumber').on('blur', checkApplicant);
+        });
+    </script>
+}
+ *@
+
+@model MVC3.Models.Applicant
+
+@{
+    ViewData["Title"] = "Create";
+    var vacancyId = ViewBag.VacancyId;
+    var existingApplicantId = ViewBag.ExistingApplicantId;
+}
+
+<h1>Create Applicant for Vacancy @vacancyId</h1>
+
+<h4>Applicant</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" name="vacancyId" value="@vacancyId" />
+
+            <div class="form-group">
+                <label class="control-label">First Name</label>
+                <input asp-for="ApplicantFirstName" class="form-control" id="ApplicantFirstName" />
+                <span asp-validation-for="ApplicantFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Middle Name</label>
+                <input asp-for="ApplicantMiddleName" class="form-control" id="ApplicantMiddleName" />
+                <span asp-validation-for="ApplicantMiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Last Name</label>
+                <input asp-for="ApplicantLastName" class="form-control" id="ApplicantLastName" />
+                <span asp-validation-for="ApplicantLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Date of Birth</label>
+                <input asp-for="DateOfBirth" class="form-control" id="DateOfBirth" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email Address</label>
+                <input asp-for="EmailAddress" class="form-control" id="emailAddress" />
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Contact Number</label>
+                <input asp-for="ContactNumber" class="form-control" id="contactNumber" />
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Home Address 1</label>
+                <input asp-for="HomeAddress1" class="form-control" id="HomeAddress1" />
+                <span asp-validation-for="HomeAddress1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Address 2</label>
+                <input asp-for="Address2" class="form-control" id="Address2" />
+                <span asp-validation-for="Address2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Nationality</label>
+                <select asp-for="Nationality" class="form-control select2">
+                    <option value="EG">Egyptian</option>
+                    <option value="US">American</option>
+                    <option value="GB">British</option>
+                    <option value="CA">Canadian</option>
+                    <option value="AU">Australian</option>
+                    <option value="FR">French</option>
+                    <option value="DE">German</option>
+                    <option value="IT">Italian</option>
+                    <option value="ES">Spanish</option>
+                    <option value="BR">Brazilian</option>
+                    <option value="IN">Indian</option>
+                    <option value="CN">Chinese</option>
+                    <option value="JP">Japanese</option>
+                </select>
+                <span asp-validation-for="Nationality" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Gender</label>
+                <input asp-for="Gender" class="form-control" id="Gender" />
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Military Status</label>
+                <input asp-for="MilitaryStatus" class="form-control" id="MilitaryStatus" />
+                <span asp-validation-for="MilitaryStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Marital Status</label>
+                <input asp-for="MaritalStatus" class="form-control" id="MaritalStatus" />
+                <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Certificate Name</label>
+                <input asp-for="CertificateName" class="form-control" id="CertificateName" />
+                <span asp-validation-for="CertificateName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Graduation Year</label>
+                <input asp-for="GraduationYear" class="form-control" id="GraduationYear" />
+                <span asp-validation-for="GraduationYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Major</label>
+                <input asp-for="Major" class="form-control" id="Major" />
+                <span asp-validation-for="Major" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">University</label>
+                <input asp-for="University" class="form-control" id="University" />
+                <span asp-validation-for="University" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Current Employer</label>
+                <input asp-for="CurrentEmployer" class="form-control" id="CurrentEmployer" />
+                <span asp-validation-for="CurrentEmployer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Current Position</label>
+                <input asp-for="CurrentPosition" class="form-control" id="CurrentPosition" />
+                <span asp-validation-for="CurrentPosition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Current Salary</label>
+                <input asp-for="CurrentSalary" class="form-control" id="CurrentSalary" />
+                <span asp-validation-for="CurrentSalary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Years of Experience</label>
+                <input asp-for="YearsOfExperience" class="form-control" id="YearsOfExperience" />
+                <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Notice Period</label>
+                <input asp-for="NoticePeriod" class="form-control" id="NoticePeriod" />
+                <span asp-validation-for="NoticePeriod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Extra Certificates</label>
+                <input asp-for="ExtraCertificates" class="form-control" id="ExtraCertificates" />
+                <span asp-validation-for="ExtraCertificates" class="text-danger"></span>
+            </div>
+            <!-- Add file upload field -->
+            <div class="form-group">
+                <label asp-for="ResumeFilePath" class="control-label">Upload Resume</label>
+                <input type="file" name="ResumeFile" class="form-control" />
+                <span asp-validation-for="ResumeFilePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" id="createButton" />
+                <button id="redirectToVacancyApplicantCreate" class="btn btn-success" style="display: none;">Continue to Vacancy Applicant</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2({
+                placeholder: "Select Nationality",
+                allowClear: true
+            });
+
+            // Show "Continue to Vacancy Applicant" button if an existing applicant is found
+            var existingApplicantId = '@existingApplicantId';
+            if (existingApplicantId) {
+                $('#createButton').hide();
+                $('#redirectToVacancyApplicantCreate').show().off('click').on('click', function () {
+                    window.location.href = '@Url.Action("RedirectToVacancyApplicantCreate", "New_Applicants")?applicantId=' + existingApplicantId + '&vacancyId=' + @vacancyId;
+                });
+            }
+
+            function checkApplicant() {
+                var email = $('#emailAddress').val();
+                var phoneNumber = $('#contactNumber').val();
+
+                if (email && phoneNumber) {
+                    $.ajax({
+                        url: '@Url.Action("CheckExistingApplicant", "New_Applicants")',
+                        type: 'POST',
+                        data: { email: email, phoneNumber: phoneNumber },
+                        success: function (data) {
+                            if (data) {
+                                if (!$('#createButton').is(':hidden')) {
+                                    if (confirm('An applicant with this email and phone number already exists. Would you like to auto-fill the form with their information?')) {
+                                        $('#ApplicantFirstName').val(data.applicantFirstName);
+                                        $('#ApplicantMiddleName').val(data.applicantMiddleName);
+                                        $('#ApplicantLastName').val(data.applicantLastName);
+                                        $('#DateOfBirth').val(data.dateOfBirth);
+                                        $('#HomeAddress1').val(data.homeAddress1);
+                                        $('#Address2').val(data.address2);
+                                        $('#Nationality').val(data.nationality);
+                                        $('#Gender').val(data.gender);
+                                        $('#MilitaryStatus').val(data.militaryStatus);
+                                        $('#MaritalStatus').val(data.maritalStatus);
+                                        $('#CertificateName').val(data.certificateName);
+                                        $('#GraduationYear').val(data.graduationYear);
+                                        $('#Major').val(data.major);
+                                        $('#University').val(data.university);
+                                        $('#CurrentEmployer').val(data.currentEmployer);
+                                        $('#CurrentPosition').val(data.currentPosition);
+                                        $('#CurrentSalary').val(data.currentSalary);
+                                        $('#YearsOfExperience').val(data.yearsOfExperience);
+                                        $('#NoticePeriod').val(data.noticePeriod);
+                                        $('#ExtraCertificates').val(data.extraCertificates);
+                                        // Hide the create button and show the continue button
+                                        $('#createButton').hide();
+                                        $('#redirectToVacancyApplicantCreate').show().off('click').on('click', function () {
+                                            window.location.href = '@Url.Action("RedirectToVacancyApplicantCreate", "New_Applicants")?applicantId=' + data.applicantId + '&vacancyId=' + @vacancyId;
+                                        });
+                                    }
+                                }
+                            }
+                        },
+                        error: function () {
+                            console.error('Error checking existing applicant');
+                        }
+                    });
+                }
+            }
+
+            var checkApplicantTimeout;
+            $('#emailAddress, #contactNumber').on('blur', function () {
+                clearTimeout(checkApplicantTimeout);
+                checkApplicantTimeout = setTimeout(checkApplicant, 500);
+            });
+        });
+    </script>
+}

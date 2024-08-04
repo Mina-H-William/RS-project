@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MVC3.Models.Vacancy>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Active Vacancies</h1>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="no-vacancies-message">
+        <h2>No current active vacancies</h2>
+    </div>
+}
+else
+{
+<div class="vacancies-list">
+    @foreach (var vacancy in Model)
+    {
+        <div class="vacancy-card">
+            <h2>@vacancy.VacancyName</h2>
+            <p>@vacancy.TotalVacancyCount vacancies available</p>
+            <p><strong>Title:</strong> @vacancy.Title.TitleName</p>
+            <p>
+                <strong>Projects:</strong>
+                @foreach (var project in vacancy.VacancyProjects)
+                {
+                    @project.Project.ProjectName
+
+                    <br />
+                }
+            </p>
+            <p><strong>Status:</strong> @(vacancy.Active ? "Active" : "Inactive")</p>
+            <p>
+                <a asp-action="Details" asp-route-id="@vacancy.VacancyId">Apply</a>
+            </p>
+        </div>
+    }
+</div>
+}
+
+@section Scripts {
+    <style>
+        .vacancies-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .vacancy-card {
+            border: 1px solid #ddd;
+            padding: 16px;
+            margin: 16px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .vacancy-card h2 {
+                font-size: 1.5em;
+                margin-bottom: 8px;
+            }
+
+            .vacancy-card p {
+                margin: 4px 0;
+            }
+    </style>
+}

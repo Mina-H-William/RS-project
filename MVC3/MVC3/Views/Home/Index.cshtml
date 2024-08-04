@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            overflow: hidden;
+            background-color: pink; /* Pink background */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .noise {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Ensure noise layer does not interfere with mouse events */
+        }
+
+        .text-center {
+            position: relative;
+            z-index: 1; /* Ensure content is above the noise effect */
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>The new HR Recruitment application for RSC.</p>
+    </div>
+
+    <!-- Load PixiJS and GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.5.0/pixi.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+    <script>
+        const initNoise = () => {
+            const noiseColors = [0xF4CE14, 0x379777, 0x45474B];
+            const app = new PIXI.Application({
+                view: document.querySelector('.noise'),
+                resizeTo: window,
+                antialias: true,
+                backgroundAlpha: 0,
+            });
+
+            const addNoise = (x, y) => {
+                const graphics = new PIXI.Graphics();
+                const size = gsap.utils.random(5, 15);
+                const radian = (Math.PI / 180) * gsap.utils.random(0, 360);
+                const radius = gsap.utils.random(0, 200);
+                graphics.beginFill(noiseColors[Math.floor(gsap.utils.random(0, noiseColors.length))]);
+                graphics.drawRect(0, 0, size, size);
+                graphics.endFill();
+                graphics.x = x || Math.cos(radian) * radius + window.innerWidth / 2;
+                graphics.y = y || Math.sin(radian) * radius + window.innerHeight / 2;
+                app.stage.addChild(graphics);
+
+                gsap.fromTo(
+                    graphics,
+                    { alpha: 0.5 },
+                    {
+                        alpha: 0,
+                        x: '+=' + size * Math.floor(gsap.utils.random(-5, 5)),
+                        y: '+=' + size * Math.floor(gsap.utils.random(-5, 5)),
+                        duration: gsap.utils.random(0.2, 1.2),
+                        ease: 'steps(3)',
+                        onComplete: () => {
+                            app.stage.removeChild(graphics);
+                        }
+                    }
+                );
+            };
+
+            setInterval(() => addNoise(), 100);
+
+            window.addEventListener('mousemove', (event) => {
+                for (let i = 0; i < 6; i++) {
+                    const radian = (Math.PI / 180) * gsap.utils.random(0, 360);
+                    const radius = gsap.utils.random(0, 100);
+                    const x = Math.cos(radian) * radius;
+                    const y = Math.sin(radian) * radius;
+                    setTimeout(() => {
+                        addNoise(event.pageX + x, event.pageY + y);
+                    }, gsap.utils.random(0, 600));
+                }
+            });
+        };
+
+        window.addEventListener('load', initNoise);
+    </script>
+</body>
+</html>
