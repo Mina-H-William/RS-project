@@ -1,28 +1,7 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\proj\\MVC3\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{0E1FD202-8DE0-4A9C-A189-57F6EE218DE8}|MVC3\\MVC3.csproj|d:\\proj\\mvc3\\mvc3\\controllers\\applicantscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0E1FD202-8DE0-4A9C-A189-57F6EE218DE8}|MVC3\\MVC3.csproj|solutionrelative:mvc3\\controllers\\applicantscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0E1FD202-8DE0-4A9C-A189-57F6EE218DE8}|MVC3\\MVC3.csproj|d:\\proj\\mvc3\\mvc3\\views\\applicants\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0E1FD202-8DE0-4A9C-A189-57F6EE218DE8}|MVC3\\MVC3.csproj|solutionrelative:mvc3\\views\\applicants\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0E1FD202-8DE0-4A9C-A189-57F6EE218DE8}|MVC3\\MVC3.csproj|d:\\proj\\mvc3\\mvc3\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0E1FD202-8DE0-4A9C-A189-57F6EE218DE8}|MVC3\\MVC3.csproj|solutionrelative:mvc3\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0E1FD202-8DE0-4A9C-A189-57F6EE218DE8}|MVC3\\MVC3.csproj|d:\\proj\\mvc3\\mvc3\\areas\\identity\\pages\\account\\manage\\externallogins.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0E1FD202-8DE0-4A9C-A189-57F6EE218DE8}|MVC3\\MVC3.csproj|solutionrelative:mvc3\\areas\\identity\\pages\\account\\manage\\externallogins.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0E1FD202-8DE0-4A9C-A189-57F6EE218DE8}|MVC3\\MVC3.csproj|d:\\proj\\mvc3\\mvc3\\areas\\identity\\pages\\account\\externallogin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0E1FD202-8DE0-4A9C-A189-57F6EE218DE8}|MVC3\\MVC3.csproj|solutionrelative:mvc3\\areas\\identity\\pages\\account\\externallogin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    }
-  ],
+  "WorkspaceRootPath": "D:\\proj\\MVC3\\MVC3\\",
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -30,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 191,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -39,71 +18,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Delete.cshtml",
-              "DocumentMoniker": "D:\\proj\\MVC3\\MVC3\\Views\\Applicants\\Delete.cshtml",
-              "RelativeDocumentMoniker": "MVC3\\Views\\Applicants\\Delete.cshtml",
-              "ToolTip": "D:\\proj\\MVC3\\MVC3\\Views\\Applicants\\Delete.cshtml",
-              "RelativeToolTip": "MVC3\\Views\\Applicants\\Delete.cshtml",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAJIAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-02T13:46:13.027Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ApplicantsController.cs",
-              "DocumentMoniker": "D:\\proj\\MVC3\\MVC3\\Controllers\\ApplicantsController.cs",
-              "RelativeDocumentMoniker": "MVC3\\Controllers\\ApplicantsController.cs",
-              "ToolTip": "D:\\proj\\MVC3\\MVC3\\Controllers\\ApplicantsController.cs",
-              "RelativeToolTip": "MVC3\\Controllers\\ApplicantsController.cs",
-              "ViewState": "AQIAAGwAAAAAAAAAAAAowAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-02T13:18:47.722Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ExternalLogin.cshtml",
-              "DocumentMoniker": "D:\\proj\\MVC3\\MVC3\\Areas\\Identity\\Pages\\Account\\ExternalLogin.cshtml",
-              "RelativeDocumentMoniker": "MVC3\\Areas\\Identity\\Pages\\Account\\ExternalLogin.cshtml",
-              "ToolTip": "D:\\proj\\MVC3\\MVC3\\Areas\\Identity\\Pages\\Account\\ExternalLogin.cshtml",
-              "RelativeToolTip": "MVC3\\Areas\\Identity\\Pages\\Account\\ExternalLogin.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-01T13:11:26.76Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ExternalLogins.cshtml",
-              "DocumentMoniker": "D:\\proj\\MVC3\\MVC3\\Areas\\Identity\\Pages\\Account\\Manage\\ExternalLogins.cshtml",
-              "RelativeDocumentMoniker": "MVC3\\Areas\\Identity\\Pages\\Account\\Manage\\ExternalLogins.cshtml",
-              "ToolTip": "D:\\proj\\MVC3\\MVC3\\Areas\\Identity\\Pages\\Account\\Manage\\ExternalLogins.cshtml",
-              "RelativeToolTip": "MVC3\\Areas\\Identity\\Pages\\Account\\Manage\\ExternalLogins.cshtml",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAMAAAA2AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-08-01T13:10:59.716Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Startup.cs",
-              "DocumentMoniker": "D:\\proj\\MVC3\\MVC3\\Startup.cs",
-              "RelativeDocumentMoniker": "MVC3\\Startup.cs",
-              "ToolTip": "D:\\proj\\MVC3\\MVC3\\Startup.cs",
-              "RelativeToolTip": "MVC3\\Startup.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEoAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-01T13:08:09.721Z"
             }
           ]
         }
