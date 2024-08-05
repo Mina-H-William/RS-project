@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MVC3.Models;
+using MVC3.Areas.Identity.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,9 @@ namespace MVC3.Data
             : base(options)
         {
         }
+
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<Applicant> Applicants { get; set; }
         public virtual DbSet<Applicant> Applicant { get; set; }
         public virtual DbSet<Country> Country { get; set; }
@@ -105,6 +109,29 @@ namespace MVC3.Data
             //.Ignore(e => e.PhoneNumberConfirmed);
 
             // Other entity configurations...
+
+            // role permissions intially
+
+            modelBuilder.Entity<RolePermission>()
+           .HasKey(rp => new { rp.RoleId, rp.PermissionId });
+
+            modelBuilder.Entity<RolePermission>()
+                .HasOne(rp => rp.Role)
+                .WithMany(r => r.RolePermissions)
+                .HasForeignKey(rp => rp.RoleId);
+
+            modelBuilder.Entity<RolePermission>()
+                .HasOne(rp => rp.Permission)
+                .WithMany(p => p.RolePermissions)
+                .HasForeignKey(rp => rp.PermissionId);
+
+            // Seed initial permissions data
+            modelBuilder.Entity<Permission>().HasData(
+                new Permission { Id = 1, Name = "Create" }
+            );
+            ////////////////
+
+
 
             OnModelCreatingPartial(modelBuilder);
         }

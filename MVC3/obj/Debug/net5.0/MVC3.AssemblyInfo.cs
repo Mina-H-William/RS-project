@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MVC3")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e61c959c3e521c94f612bc2d761f5f95021b4087")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e8433e198a0e32de4e5f3bb7251e5f91fd8edfda")]
 [assembly: System.Reflection.AssemblyProductAttribute("MVC3")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MVC3")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

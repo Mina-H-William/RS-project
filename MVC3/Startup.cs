@@ -1,4 +1,5 @@
-    using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MVC3.Areas.Identity.Authorization;
+using MVC3.Areas.Identity.Models;
 using MVC3.Data;
 using System;
 using System.Collections.Generic;
@@ -39,9 +42,18 @@ namespace MVC3
                          .LogTo(Console.WriteLine, LogLevel.Information));
 
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<IdentityUser, ApplicationRole>(/*options => options.SignIn.RequireConfirmedAccount = true*/)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("PermissionPolicy", policy =>
+                {
+                    policy.Requirements.Add(new PermissionRequirement("RequiredPermission"));
+                });
+            });
+
+            services.AddScoped<IAuthorizationHandler, PermissionHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,9 +81,11 @@ namespace MVC3
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                name: "areas",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
             });
         }
     }
