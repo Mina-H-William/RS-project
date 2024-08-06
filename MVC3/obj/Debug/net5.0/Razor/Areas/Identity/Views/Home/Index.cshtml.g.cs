@@ -28,12 +28,18 @@ using MVC3.Areas.Identity.ViewModels
 #line 3 "D:\RS-project\MVC3\Areas\Identity\Views\_ViewImports.cshtml"
 using MVC3.Areas.Identity.Models
 
+#nullable disable
+    ;
+#nullable restore
+#line 4 "D:\RS-project\MVC3\Areas\Identity\Views\_ViewImports.cshtml"
+using MVC3.Areas.Identity.Services
+
 #line default
 #line hidden
 #nullable disable
     ;
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"8eba50ddf0578d99ed9e5c59a6a6b0dbcf4cbb8d2f1a9bbdc56c5c8b5a7df0d2", @"/Areas/Identity/Views/Home/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"857f22c3efe6c3db764844603a3d8bfb596e51da140433fe2c658b6bd3db58f1", @"/Areas/Identity/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"d33e0cb569ec0546cbbacc3c5cfb921b123157e7e45f394410101515e0615ac0", @"/Areas/Identity/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Areas_Identity_Views_Home_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     #nullable disable

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MVC3.Areas.Identity.Authorization;
 using MVC3.Areas.Identity.Models;
+using MVC3.Areas.Identity.Services;
 using MVC3.Data;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,7 @@ namespace MVC3
             });
 
             services.AddScoped<IAuthorizationHandler, PermissionHandler>();
+            services.AddScoped<PermissionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

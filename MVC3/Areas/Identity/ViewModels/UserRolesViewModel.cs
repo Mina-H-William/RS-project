@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MVC3.Areas.Identity.ViewModelss
+namespace MVC3.Areas.Identity.ViewModels
 {
     public class UserRolesViewModel
     {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MVC3.Areas.Identity.Authorization;
 using MVC3.Areas.Identity.ViewModels;
 using System.Threading.Tasks;
 
@@ -24,6 +25,7 @@ namespace MVC3.Areas.Identity.Controllers
             return View();
         }
 
+        
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
@@ -96,6 +98,7 @@ namespace MVC3.Areas.Identity.Controllers
 
                 if (result.Succeeded)
                 {
+                    TempData["LoginSuccess"] = true;
                     if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
