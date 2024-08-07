@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Country>
+
+@{
+    ViewData["Title"] = "Countries";
+}
+
+<h1>Countries</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Country Name
+                </th>
+                <th>
+                    Country Code
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CountryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CountryCode)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CountryId" class="btn btn-warning btn-sm">Edit</a> 
+                        <a asp-action="Details" asp-route-id="@item.CountryId" class="btn btn-info btn-sm">Details</a> 
+                        <a asp-action="Delete" asp-route-id="@item.CountryId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

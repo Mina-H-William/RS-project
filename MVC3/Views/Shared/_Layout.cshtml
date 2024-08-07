@@ -25,43 +25,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link text-dark dropdown-toggle" href="#" id="menuDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Menu
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="menuDropdown">
-                                    <a class="dropdown-item" asp-controller="Countries" asp-action="Index">Countries</a>
-                                    <a class="dropdown-item" asp-controller="Locations" asp-action="Index">Locations</a>
-                                    <a class="dropdown-item" asp-controller="Departments" asp-action="Index">Departments</a>
-                                    <a class="dropdown-item" asp-controller="Titles" asp-action="Index">Titles</a>
-                                    <a class="dropdown-item" asp-controller="Projects" asp-action="Index">Projects</a>
-                                    <a class="dropdown-item" asp-controller="Vacancies" asp-action="Index">Vacancies</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link text-dark dropdown-toggle" href="#" id="menuDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Tracking
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="menuDropdown">
-                                    <a class="dropdown-item" asp-controller="Applicants" asp-action="Index">Applicants</a>
-                                    <a class="dropdown-item" asp-controller="VacancyApplicants" asp-action="Index">Submissions</a>
-                                </div>
-                            </li>
-                        }
-                        else
-                        {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Active_Vacancies" asp-action="Index">Active Vacancies</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Active_Vacancies" asp-action="Index">Active Vacancies</a>
                         </li>
-                        }
                     </ul>
-                    @* @if (User.Identity.IsAuthenticated)
-                    {
-                        <partial name="_LoginPartial" />
-                    } *@
-
                 </div>
             </div>
         </nav>

@@ -1,0 +1,127 @@
+﻿@inject SignInManager<IdentityUser> signInManager;
+@inject PermissionService ps;
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MVC3</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-n/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Access" asp-controller="Home" asp-action="index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Access" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="identity" asp-controller="Home" asp-action="index">Identity</a>
+                        </li>
+                        <li class="nav-item d-flex">
+                            <div class="btn-group align-items-center">
+                                <button type="button" class=" dropdown-toggle custom" style="color:black; background-color: white; border:none" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Tracking
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" asp-area="Access" asp-controller="Applicants" asp-action="Index">
+                                            Applicants
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="nav-item d-flex">
+                            <div class="btn-group align-items-center">
+                                <button type="button" class=" dropdown-toggle custom" style="color:black; background-color: white; border:none" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Menu
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" asp-area="Access" asp-controller="Countries" asp-action="Index">Countries</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="Access" asp-controller="Locations" asp-action="Index">Locations</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="Access" asp-controller="Departments" asp-action="Index">Departments</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="Access" asp-controller="Titles" asp-action="Index">Titles</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="Access" asp-controller="Projects" asp-action="Index">Projects</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-area="Access" asp-controller="Vacancies" asp-action="Index">Vacancies</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <form method="post" asp-action="Logout" asp-controller="account" asp-area="identity">
+                                    <button type="submit" class="nav-link btn btn-link py-0"
+                                            style="width:auto">
+                                        Logout @User.Identity.Name
+                                    </button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a asp-action="Register" asp-controller="account" asp-area="identity" class="nav-link">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Login" asp-controller="account" asp-area="identity" class="nav-link">Login</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - MVC3 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap-n/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
+</body>
+</html>

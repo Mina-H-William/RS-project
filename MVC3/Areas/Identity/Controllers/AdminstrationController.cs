@@ -31,13 +31,6 @@ namespace MVC3.Areas.Identity.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
-
-        [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await roleManager.FindByIdAsync(id);

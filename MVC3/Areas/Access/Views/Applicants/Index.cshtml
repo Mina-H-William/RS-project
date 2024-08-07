@@ -1,0 +1,190 @@
+﻿@* @model IEnumerable<Applicant>
+
+@{
+    ViewData["Title"] = "Applicants";
+}
+
+<h1>Applicants</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+                <th>Email Address</th>
+                <th>Contact Number</th>
+                <th>Home Address</th>
+                <th>Address 2</th>
+                <th>Nationality</th>
+                <th>Gender</th>
+                <th>Military Status</th>
+                <th>Marital Status</th>
+                <th>Certificate Name</th>
+                <th>Graduation Year</th>
+                <th>Major</th>
+                <th>University</th>
+                <th>Current Employer</th>
+                <th>Current Position</th>
+                <th>Current Salary</th>
+                <th>Years of Experience</th>
+                <th>Notice Period</th>
+                <th>Extra Certificates</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ApplicantFirstName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ApplicantMiddleName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ApplicantLastName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DateOfBirth)</td>
+                    <td>@Html.DisplayFor(modelItem => item.EmailAddress)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ContactNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.HomeAddress1)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Address2)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nationality)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MilitaryStatus)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MaritalStatus)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CertificateName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.GraduationYear)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Major)</td>
+                    <td>@Html.DisplayFor(modelItem => item.University)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CurrentEmployer)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CurrentPosition)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CurrentSalary)</td>
+                    <td>@Html.DisplayFor(modelItem => item.YearsOfExperience)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NoticePeriod)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ExtraCertificates)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ApplicantId" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.ApplicantId" class="btn btn-info btn-sm">Details</a> 
+                        <a asp-action="Delete" asp-route-id="@item.ApplicantId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .table-responsive {
+        overflow-x: auto;
+        overflow-y: auto; /* Add vertical overflow */
+        max-height: 600px; /* Adjust height as needed */
+    }
+
+    .table {
+        border-collapse: collapse; /* Ensure borders and spacing are consistent */
+        width: 100%;
+    }
+
+    thead th {
+        position: sticky;
+        top: 0;
+        background-color: #f9f9f9; /* Adjust background color */
+        z-index: 2; /* Ensure headers are above other content */
+        border-bottom: 2px solid #ddd; /* Optional: add a border for visual separation */
+    }
+
+    tbody td {
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    /* Add spacing between action links */
+    .table td a {
+        margin-right: 10px; /* Adjust this value as needed */
+    }
+
+        /* Remove margin from the last link */
+        .table td a:last-child {
+            margin-right: 0;
+        }
+</style> *@
+
+@model IEnumerable<Applicant>
+
+@{
+    ViewData["Title"] = "Applicants";
+}
+
+<h1>Applicants</h1>
+
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email Address</th>
+                <th>Contact Number</th>
+                <th>Nationality</th>
+                <th>Certificate Name</th>
+                <th>University</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ApplicantFirstName @item.ApplicantMiddleName @item.ApplicantLastName</td>
+                    <td>@Html.DisplayFor(modelItem => item.EmailAddress)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ContactNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nationality)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CertificateName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.University)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ApplicantId" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.ApplicantId" class="btn btn-info btn-sm">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.ApplicantId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .table-responsive {
+        overflow-x: auto;
+        overflow-y: auto; /* Add vertical overflow */
+        max-height: 600px; /* Adjust height as needed */
+    }
+
+    .table {
+        border-collapse: collapse; /* Ensure borders and spacing are consistent */
+        width: 100%;
+    }
+
+    thead th {
+        position: sticky;
+        top: 0;
+        background-color: #f9f9f9; /* Adjust background color */
+        z-index: 2; /* Ensure headers are above other content */
+        border-bottom: 2px solid #ddd; /* Optional: add a border for visual separation */
+    }
+
+    tbody td {
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    /* Add spacing between action links */
+    .table td a {
+        margin-right: 10px; /* Adjust this value as needed */
+    }
+
+        /* Remove margin from the last link */
+        .table td a:last-child {
+            margin-right: 0;
+        }
+</style>

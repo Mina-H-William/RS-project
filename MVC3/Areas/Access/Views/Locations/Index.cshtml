@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Location>
+
+@{
+    ViewData["Title"] = "Locations";
+}
+
+<h1>Locations</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Location Name
+                </th>
+                <th>
+                    Country
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LocationName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country.CountryName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.LocationId" class="btn btn-warning btn-sm">Edit</a> 
+                        <a asp-action="Details" asp-route-id="@item.LocationId" class="btn btn-info btn-sm">Details</a> 
+                        <a asp-action="Delete" asp-route-id="@item.LocationId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .table-responsive {
+        overflow-x: auto;
+        overflow-y: auto; /* Add vertical overflow */
+        max-height: 600px; /* Adjust height as needed */
+    }
+
+    .table {
+        border-collapse: collapse; /* Ensure borders and spacing are consistent */
+        width: 100%;
+    }
+
+    thead th {
+        position: sticky;
+        top: 0;
+        background-color: #f9f9f9; /* Adjust background color */
+        z-index: 2; /* Ensure headers are above other content */
+        border-bottom: 2px solid #ddd; /* Optional: add a border for visual separation */
+    }
+
+    tbody td {
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    /* Add spacing between action links */
+    .table td a {
+        margin-right: 10px; /* Adjust this value as needed */
+    }
+
+        /* Remove margin from the last link */
+        .table td a:last-child {
+            margin-right: 0;
+        }
+</style>

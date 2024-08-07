@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC3.Data;
+using MVC3.Areas.Access.Models;
 using MVC3.Models;
+
 
 namespace MVC3.Controllers
 {
-    //[Authorize]
+
     public class VacancyApplicantsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -165,8 +167,10 @@ namespace MVC3.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> View_Submissions(int vacancyId)
+        public async Task<IActionResult> ViewSubmissions(int vacancyId)
         {
+            ViewBag.VacancyId = vacancyId; // Pass vacancyId to view if needed
+
             var submissions = await _context.VacancyApplicant
                 .Include(v => v.Applicant)
                 .Where(v => v.VacancyId == vacancyId)
@@ -181,9 +185,24 @@ namespace MVC3.Controllers
                 })
                 .ToListAsync();
 
-            ViewBag.VacancyId = vacancyId; // Pass vacancyId to view if needed
 
-            return View(submissions);
+            var submissionsview = new List<SubmissionViewModel>();
+            
+            foreach(var sub in submissions)
+            {
+                var subview = new SubmissionViewModel()
+                {
+                    ApplicantFirstName = sub.ApplicantFirstName,
+                    ApplicantLastName = sub.ApplicantLastName,
+                    ApplicantId = sub.ApplicantId,
+                    VacancyId = sub.VacancyId,
+                    YearsOfExperience = sub.YearsOfExperience,
+                    ResumeFilePath = sub.ResumeFilePath
+                };
+                submissionsview.Add(subview);
+            }
+
+            return View(submissionsview);
         }
 
         private bool VacancyApplicantExists(int vacancyId, int applicantId)

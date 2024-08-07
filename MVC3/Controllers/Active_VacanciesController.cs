@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC3.Data;
-using MVC3.Models;
+using MVC3.Areas.Access.Models;
 
 namespace MVC3.Controllers
 {

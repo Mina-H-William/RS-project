@@ -45,13 +45,28 @@ namespace MVC3
 
             services.AddIdentity<IdentityUser, ApplicationRole>(/*options => options.SignIn.RequireConfirmedAccount = true*/)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            });
+
             services.AddControllersWithViews();
+
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("PermissionPolicy", policy =>
+                using (var scope = services.BuildServiceProvider().CreateScope())
                 {
-                    policy.Requirements.Add(new PermissionRequirement("RequiredPermission"));
-                });
+                    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                    var permissions = dbContext.Permissions.Select(p => p.Name).ToList();
+
+                    foreach (var permission in permissions)
+                    {
+                        options.AddPolicy(permission, policy =>
+                            policy.Requirements.Add(new PermissionRequirement(permission)));
+                    }
+                }
             });
 
             services.AddScoped<IAuthorizationHandler, PermissionHandler>();

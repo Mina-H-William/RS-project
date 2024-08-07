@@ -28,7 +28,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="identity" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (signInManager.IsSignedIn(User) && await ps.UserHasPermissionAsync(User,"Admin"))
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Access" asp-controller="Home" asp-action="Index">Access</a>
+                            </li>
+                        }
+                        @if (signInManager.IsSignedIn(User) && await ps.UserHasPermissionAsync(User, "Admin"))
                         {
                             <li class="nav-item d-flex">
                                 <div class="btn-group align-items-center">

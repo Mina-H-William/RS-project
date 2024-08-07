@@ -25,7 +25,13 @@ namespace MVC3.Areas.Identity.Controllers
             return View();
         }
 
-        
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Logout()
         {

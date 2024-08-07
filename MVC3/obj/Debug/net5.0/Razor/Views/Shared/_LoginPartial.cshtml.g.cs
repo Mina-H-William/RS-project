@@ -25,6 +25,12 @@ using MVC3.Models
 #nullable disable
     ;
 #nullable restore
+#line 3 "D:\RS-project\MVC3\Views\_ViewImports.cshtml"
+using MVC3.Areas.Access.Models
+
+#nullable disable
+    ;
+#nullable restore
 #line 1 "D:\RS-project\MVC3\Views\Shared\_LoginPartial.cshtml"
  using Microsoft.AspNetCore.Identity
 
@@ -33,7 +39,7 @@ using MVC3.Models
 #nullable disable
     ;
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"daeb91243848a5dbde45491cd8de58676401a35e0a13aa5b6204aab70f8deae0", @"/Views/Shared/_LoginPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"63e920a3a356c4a0cd52ac24d1b964a5f477644bebc145bc44551f48121c5841", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"1ca9289295aa086821cf8d97c5cbdcf559c071f59b200cf8efd6bb0c8d3b1308", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Shared__LoginPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     #nullable disable
@@ -83,7 +89,7 @@ using MVC3.Models
 #nullable disable
 
             WriteLiteral("    <li class=\"nav-item\">\r\n        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "daeb91243848a5dbde45491cd8de58676401a35e0a13aa5b6204aab70f8deae06457", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "daeb91243848a5dbde45491cd8de58676401a35e0a13aa5b6204aab70f8deae06592", async() => {
                 WriteLiteral("Hello ");
                 Write(
 #nullable restore
@@ -113,7 +119,7 @@ using MVC3.Models
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "daeb91243848a5dbde45491cd8de58676401a35e0a13aa5b6204aab70f8deae08399", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "daeb91243848a5dbde45491cd8de58676401a35e0a13aa5b6204aab70f8deae08534", async() => {
                 WriteLiteral("\r\n            <button  type=\"submit\" class=\"nav-link btn btn-link text-dark\">Logout</button>\r\n        ");
             }
             );
@@ -162,7 +168,7 @@ else
 #nullable disable
 
             WriteLiteral("    <li class=\"nav-item\">\r\n        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "daeb91243848a5dbde45491cd8de58676401a35e0a13aa5b6204aab70f8deae011589", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "daeb91243848a5dbde45491cd8de58676401a35e0a13aa5b6204aab70f8deae011724", async() => {
                 WriteLiteral("Register");
             }
             );
@@ -181,7 +187,7 @@ else
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "daeb91243848a5dbde45491cd8de58676401a35e0a13aa5b6204aab70f8deae013104", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "daeb91243848a5dbde45491cd8de58676401a35e0a13aa5b6204aab70f8deae013239", async() => {
                 WriteLiteral("Login");
             }
             );

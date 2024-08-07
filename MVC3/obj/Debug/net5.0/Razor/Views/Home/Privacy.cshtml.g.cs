@@ -22,12 +22,18 @@ using MVC3
 #line 2 "D:\RS-project\MVC3\Views\_ViewImports.cshtml"
 using MVC3.Models
 
+#nullable disable
+    ;
+#nullable restore
+#line 3 "D:\RS-project\MVC3\Views\_ViewImports.cshtml"
+using MVC3.Areas.Access.Models
+
 #line default
 #line hidden
 #nullable disable
     ;
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"0e00a4445b214863ea51c8985fae1970b43e932712216fa047faf3062bb23445", @"/Views/Home/Privacy.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"63e920a3a356c4a0cd52ac24d1b964a5f477644bebc145bc44551f48121c5841", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"1ca9289295aa086821cf8d97c5cbdcf559c071f59b200cf8efd6bb0c8d3b1308", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Home_Privacy : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     #nullable disable

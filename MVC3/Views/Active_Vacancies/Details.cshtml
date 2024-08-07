@@ -1,4 +1,4 @@
-﻿ @model MVC3.Models.Vacancy
+﻿ @model Vacancy
 
 @{
     ViewData["Title"] = "Details";
@@ -47,6 +47,6 @@
     </dl>
 </div>
 <div>
-    <a asp-controller="New_Applicants" asp-action="Create" asp-route-vacancyId="@Model.VacancyId">Apply</a> |
+    <a asp-controller="New_Applicants" asp-action="Create" asp-route-vacancyId="@Model.VacancyId">Apply</a>
     <a asp-action="Index">Back to List</a>
 </div>

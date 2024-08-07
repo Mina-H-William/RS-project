@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MVC3.Models;
+using MVC3.Areas.Access.Models;
 using MVC3.Areas.Identity.Models;
 using System;
 using System.Collections.Generic;

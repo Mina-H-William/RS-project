@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Title>
+
+@{
+    ViewData["Title"] = "Titles";
+}
+
+<h1>Titles</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Title Name
+                </th>
+                <th>
+                    Department
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TitleName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.TitleId" class="btn btn-warning btn-sm">Edit</a> 
+                        <a asp-action="Details" asp-route-id="@item.TitleId" class="btn btn-info btn-sm">Details</a> 
+                        <a asp-action="Delete" asp-route-id="@item.TitleId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
