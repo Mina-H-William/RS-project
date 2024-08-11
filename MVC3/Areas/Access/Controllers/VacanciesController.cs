@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC3.Data;
 using MVC3.Areas.Access.Models;
+using MVC3.Areas.Identity.Authorization;
 
 namespace MVC3.Areas.Access.Controllers
 {
     [Area("Access")]
+    [Permission("Vacancy")]
     public class VacanciesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -70,6 +72,12 @@ namespace MVC3.Areas.Access.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(await  _context.Vacancy.AnyAsync(
+                    v => v.VacancyName.ToLower().Equals(vacancy.VacancyName.ToLower())))
+                {
+                    ModelState.AddModelError("", "there another vacancy with the same name");
+                    return View(vacancy);
+                }
                 if (vacancy.SelectedProjectIds != null)
                 {
                     vacancy.VacancyProjects = new List<VacancyProject>();
@@ -78,7 +86,7 @@ namespace MVC3.Areas.Access.Controllers
                         vacancy.VacancyProjects.Add(new VacancyProject { ProjectId = projectId });
                     }
                 }
-                _context.Add(vacancy);
+                await _context.AddAsync(vacancy);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -282,6 +290,40 @@ namespace MVC3.Areas.Access.Controllers
             return View(activeVacancies);
         }
 
+        public async Task<IActionResult> ViewSubmissions(int Id)
+        {
+            ViewData["vid"] = Id;
+            var submissions = await _context.VacancyApplicant
+                .Include(v => v.Applicant)
+                .Where(v => v.VacancyId == Id)
+                .Select(v => new
+                {
+                    v.Applicant.ApplicantFirstName,
+                    v.Applicant.ApplicantLastName,
+                    v.Applicant.YearsOfExperience,
+                    v.Applicant.ResumeFilePath,
+                    v.Applicant.ApplicantId
+                })
+                .ToListAsync();
+
+
+            var submissionsview = new List<SubmissionViewModel>();
+
+            foreach (var sub in submissions)
+            {
+                var subview = new SubmissionViewModel()
+                {
+                    ApplicantFirstName = sub.ApplicantFirstName,
+                    ApplicantLastName = sub.ApplicantLastName,
+                    ApplicantId = sub.ApplicantId,
+                    YearsOfExperience = sub.YearsOfExperience,
+                    ResumeFilePath = sub.ResumeFilePath
+                };
+                submissionsview.Add(subview);
+            }
+
+            return View(submissionsview);
+        }
 
         private bool VacancyExists(int id)
         {

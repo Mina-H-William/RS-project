@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC3.Data;
 using MVC3.Areas.Access.Models;
+using MVC3.Areas.Identity.Authorization;
 
 namespace MVC3.Areas.Access.Controllers
 {
     [Area("Access")]
+    [Permission("Project")]
     public class ProjectsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -63,7 +65,14 @@ namespace MVC3.Areas.Access.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(project);
+                if(await _context.Project.AnyAsync(
+                    p=> p.ProjectName.ToLower().Equals(project.ProjectName.ToLower()) && 
+                    p.LocationId==project.LocationId))
+                {
+                    ModelState.AddModelError("", "this project exist");
+                    return View(project);
+                }
+                await _context.AddAsync(project);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

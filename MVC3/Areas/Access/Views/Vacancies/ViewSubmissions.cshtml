@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "View Submissions";
-    var vid = ViewBag.VacancyId;
+    var vid = ViewData["vid"] as int?;
 }
 
 <h1>Submissions for Vacancy @vid</h1>
@@ -35,12 +35,13 @@
                             <a>
                                 No CV Available
                             </a>
-                            }
+                        }
                     </td>
                     <td>
-                        @Html.ActionLink("Details", "Details", new { id = item.ApplicantId })
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ApplicantId })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ApplicantId })
+                        @Html.ActionLink("Details", "Details", "Applicants", new { id = item.ApplicantId, toviewsubmission = true })
+                        @Html.ActionLink("HR-Evaluate", "", "", new { id = item.ApplicantId })
+                        @Html.ActionLink("Technical-Evaluate", "", "", new { id = item.ApplicantId })
+
                     </td>
                 </tr>
             }

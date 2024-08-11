@@ -2,6 +2,7 @@
 using MVC3.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -15,6 +16,9 @@ namespace MVC3.Areas.Access.Models
         }
 
         public int LocationId { get; set; }
+
+        [Required(ErrorMessage = "Location name is required")]
+        [StringLength(100, ErrorMessage = "Location name can't be longer than 100 characters")]
         public string LocationName { get; set; }
         public int CountryId { get; set; }
 

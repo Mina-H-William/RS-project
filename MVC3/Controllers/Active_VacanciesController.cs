@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC3.Data;
 using MVC3.Areas.Access.Models;
+using MVC3.ViewModels;
 
 namespace MVC3.Controllers
 {
@@ -24,14 +25,35 @@ namespace MVC3.Controllers
         {
             //var applicationDbContext = _context.Vacancy.Include(v => v.Title);
             //return View(await applicationDbContext.ToListAsync());
+            
             var activeVacancies = await _context.Vacancy
-                .Include(v => v.Title)
-                   .Include(v => v.VacancyProjects)
-                      .ThenInclude(vp => vp.Project)
-                         .Where(v => v.Active)
-                               .ToListAsync();
+                .Where(v => v.Active)
+                .Select(v => new
+                {
+                    v.VacancyId,
+                    v.VacancyName,
+                    v.TotalVacancyCount,
+                    Titlename = v.Title.TitleName,
+                    Locations = v.VacancyProjects.Select(vp => vp.Project.Location).ToList()
+                })
+                .ToListAsync();
 
-            return View(activeVacancies);
+            var activeVacanciesmodel = new List<activeVacanciesViewModel>();
+
+            foreach(var av in activeVacancies)
+            {
+                var activev = new activeVacanciesViewModel() {
+                    TitleName = av.Titlename,
+                    vacancyid = av.VacancyId,
+                    locations = av.Locations,
+                    TotalVacancyCount = av.TotalVacancyCount,
+                    vacancyname = av.VacancyName,
+                    Active = true
+                };
+                activeVacanciesmodel.Add(activev);
+            }
+
+            return View(activeVacanciesmodel);
         }
 
         // GET: Active_Vacancies/Details/5
@@ -44,10 +66,26 @@ namespace MVC3.Controllers
             }
 
             var vacancy = await _context.Vacancy
-                .Include(v => v.Title)
-                .Include(v => v.VacancyProjects)
-                    .ThenInclude(vp => vp.Project)
+                .Where(v => v.Active)
+                .Select(v => new
+                {
+                    v.VacancyId,
+                    v.VacancyName,
+                    v.TotalVacancyCount,
+                    Titlename = v.Title.TitleName,
+                    Locations = v.VacancyProjects.Select(vp => vp.Project.Location).ToList()
+                })
                 .FirstOrDefaultAsync(m => m.VacancyId == id);
+
+            activeVacanciesViewModel actvacancy = new activeVacanciesViewModel()
+            {
+                vacancyname = vacancy.VacancyName,
+                vacancyid = vacancy.VacancyId,
+                TotalVacancyCount = vacancy.TotalVacancyCount,
+                locations = vacancy.Locations,
+                TitleName = vacancy.Titlename,
+                Active = true
+            };
 
             if (vacancy == null)
             {
@@ -55,7 +93,7 @@ namespace MVC3.Controllers
             }
             ViewBag.VacancyId = vacancy.VacancyId;
             ViewBag.Active = true;
-            return View(vacancy);
+            return View(actvacancy);
         }
 
 

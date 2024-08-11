@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Create";
+    var vacancyid = ViewData["VacancyId"] as int?;
+    var locations = (SelectList)ViewData["Locations"];
 }
 
 <h1>Create Vacancy Applicant</h1>
@@ -38,7 +40,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Location</label>
-                <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
+                <select asp-for="LocationId" class="form-control" asp-items="@locations"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -48,5 +50,5 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="create" asp-controller="new_applicants" asp-route-VacancyId="@vacancyid">Back to Applicant Details</a>
 </div>

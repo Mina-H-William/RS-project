@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC3.Data;
 using MVC3.Areas.Access.Models;
+using MVC3.Areas.Identity.Authorization;
 
 namespace MVC3.Areas.Access.Controllers
 {
     [Area("Access")]
+    [Permission("Department")]
     public class DepartmentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -60,7 +62,14 @@ namespace MVC3.Areas.Access.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(department);
+                if (await _context.Department.AnyAsync
+                    (d => d.DepartmentName.ToLower().Equals(department.DepartmentName.ToLower()) ||
+                     d.DepartmentCode.Equals(department.DepartmentCode)))
+                {
+                    ModelState.AddModelError("", "Department name exist or department code exist");
+                    return View(department);
+                }
+                await _context.AddAsync(department);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

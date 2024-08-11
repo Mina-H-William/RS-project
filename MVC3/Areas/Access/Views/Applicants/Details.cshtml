@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    var toviewsubmission = ViewData["toviewsubmission"] as bool?;
 }
 
 <h1>Details</h1>
@@ -142,9 +143,34 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ExtraCertificates)
         </dd>
+        @if (!string.IsNullOrEmpty(Model.ResumeFilePath))
+        {
+            <dt class="col-sm-2">
+                CV
+            </dt>
+            <dd class="col-sm-10">
+                <a href="@Url.Content(Model.ResumeFilePath)" target="_blank">View CV</a>
+            </dd>
+        }
+        else
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ResumeFilePath)
+            </dt>
+            <dd class="col-sm-10">
+                No Cv
+            </dd>
+        }
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ApplicantId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.ApplicantId" asp-route-toviewsubmission="@toviewsubmission">Edit</a>
+    @if (toviewsubmission == true)
+    {
+        <a asp-action="index" asp-controller="vacancies">Back to List</a>
+    }
+    else
+    {
     <a asp-action="Index">Back to List</a>
+    }
 </div>

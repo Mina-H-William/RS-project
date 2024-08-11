@@ -8,10 +8,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC3.Data;
 using MVC3.Areas.Access.Models;
+using MVC3.Areas.Identity.Authorization;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace MVC3.Areas.Access.Controllers
 {
     [Area("Access")]
+    [Permission("Country")]
     public class CountriesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -60,7 +63,14 @@ namespace MVC3.Areas.Access.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(country);
+                if (await _context.Country.AnyAsync(
+                    c => c.CountryName.ToLower().Equals(country.CountryName.ToLower())
+                    || c.CountryCode.Equals(country.CountryCode)))
+                {
+                    ModelState.AddModelError("", "country name exist or country code exist");
+                    return View(country);
+                }
+                await _context.AddAsync(country);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

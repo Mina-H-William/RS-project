@@ -68,6 +68,7 @@ namespace MVC3.Data
     // Add more nationalities as needed
     );
 
+
             modelBuilder.Entity<Vacancy>()
                 .HasMany(p => p.Projects)
                 .WithMany(v => v.Vacancies)
@@ -96,7 +97,7 @@ namespace MVC3.Data
 
                 entity.HasOne(e => e.Applicant)
                     .WithMany(a => a.VacancyApplicants)
-                    .HasForeignKey(e => e.ApplicantId);
+                    .HasForeignKey(e => e.ApplicantId).OnDelete(DeleteBehavior.Cascade);
             });
 
             //modelBuilder.Entity<IdentityUser>().ToTable("Users", "security");
@@ -128,7 +129,14 @@ namespace MVC3.Data
 
             // Seed initial permissions data
             modelBuilder.Entity<Permission>().HasData(
-                new Permission { Id = 1, Name = "Create" }
+                new Permission { Id = 1, Name = "Admin" },
+                new Permission { Id = 2, Name = "Applicant" },
+                new Permission { Id = 3, Name = "Country" },
+                new Permission { Id = 4, Name = "Vacancy" },
+                new Permission { Id = 5, Name = "Title" },
+                new Permission { Id = 6, Name = "Project" },
+                new Permission { Id = 7, Name = "Department" },
+                new Permission { Id = 8, Name = "Location" }
             );
             ////////////////
 

@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC3.Data;
 using MVC3.Areas.Access.Models;
+using MVC3.Areas.Identity.Authorization;
 
 namespace MVC3.Areas.Access.Controllers
 {
     [Area("Access")]
+    [Permission("Title")]
     public class TitlesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -63,7 +65,14 @@ namespace MVC3.Areas.Access.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(title);
+                if(await _context.Title.AnyAsync(
+                    t => t.TitleName.ToLower().Equals(title.TitleName.ToLower()) &&
+                    t.DepartmentId == title.DepartmentId))
+                {
+                    ModelState.AddModelError("", "there a title exist in this department with the same name");
+                    return View(title);
+                }
+                await _context.AddAsync(title);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

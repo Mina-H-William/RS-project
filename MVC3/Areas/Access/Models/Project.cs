@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -8,6 +9,8 @@ namespace MVC3.Areas.Access.Models
     {
      
         public int ProjectId { get; set; }
+
+        [Required(ErrorMessage ="Project is Required")]
         public string ProjectName { get; set; }
         public int LocationId { get; set; }
         public bool Active { get; set; }

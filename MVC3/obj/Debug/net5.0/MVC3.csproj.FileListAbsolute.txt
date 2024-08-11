@@ -1551,7 +1551,6 @@ D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\Active_Vacancies\Edit.cshtml.g.c
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\Active_Vacancies\Index.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
-D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\Index.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\New_Applicants\Create.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\New_Applicants\Delete.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\New_Applicants\Details.cshtml.g.cs
@@ -1645,4 +1644,4 @@ D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\VacancyApplicants\Details.cshtml
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\VacancyApplicants\Edit.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\VacancyApplicants\Index.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Identity\Views\Account\AccessDenied.cshtml.g.cs
-D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\VacancyApplicants\ViewSubmissions.cshtml.g.cs
+D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Access\Views\Vacancies\ViewSubmissions.cshtml.g.cs

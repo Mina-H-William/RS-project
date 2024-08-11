@@ -84,6 +84,7 @@ namespace MVC3.Areas.Access.Models
 
         //[NotMapped]
         //public IFormFile Resume { get; set; }
+        
         public string ResumeFilePath { get; set; } // New property for storing the file path
 
         [NotMapped]

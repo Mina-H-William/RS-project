@@ -225,7 +225,7 @@
 
 @{
     ViewData["Title"] = "Create";
-    var vacancyId = ViewBag.VacancyId;
+    var vacancyId = ViewBag.VacancyId as int?;
     var existingApplicantId = ViewBag.ExistingApplicantId;
 }
 
@@ -238,7 +238,7 @@
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <input type="hidden" name="vacancyId" value="@vacancyId" />
+            <input type="hidden" name="vacancyId" asp-for="@vacancyId" />
 
             <div class="form-group">
                 <label class="control-label">First Name</label>
@@ -371,15 +371,15 @@
                 <span asp-validation-for="ResumeFilePath" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" id="createButton" />
-                <button id="redirectToVacancyApplicantCreate" class="btn btn-success" style="display: none;">Continue to Vacancy Applicant</button>
+                @* <input type="submit" value="Create" class="btn btn-primary" id="createButton" /> *@
+                <button type="submit" id="redirectToVacancyApplicantCreate" class="btn btn-success">Continue to Vacancy Applicant</button>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-controller="Active_Vacancies">Back to List</a>
 </div>
 
 @section Scripts {
@@ -433,10 +433,10 @@
                                         $('#NoticePeriod').val(data.noticePeriod);
                                         $('#ExtraCertificates').val(data.extraCertificates);
                                         // Hide the create button and show the continue button
-                                        $('#createButton').hide();
-                                        $('#redirectToVacancyApplicantCreate').show().off('click').on('click', function () {
+                                        //$('#createButton').hide();
+                                        /*$('#redirectToVacancyApplicantCreate').show().off('click').on('click', function () {
                                             window.location.href = '@Url.Action("RedirectToVacancyApplicantCreate", "New_Applicants")?applicantId=' + data.applicantId + '&vacancyId=' + @vacancyId;
-                                        });
+                                        });*/
                                     }
                                 }
                             }

@@ -1,8 +1,8 @@
-﻿ @model Vacancy
+﻿ @model activeVacanciesViewModel
 
 @{
     ViewData["Title"] = "Details";
-    var vacancyId = Model.VacancyId;
+    var vacancyId = Model.vacancyid;
 }
 
 <h1>Details for Vacancy @vacancyId</h1>
@@ -15,7 +15,7 @@
             Vacancy Name
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VacancyName)
+            @Html.DisplayFor(model => model.vacancyname)
         </dd>
         <dt class="col-sm-2">
             Total Vacancy Count
@@ -27,7 +27,7 @@
             Title Name
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Title.TitleName)
+            @Html.DisplayFor(model => model.TitleName)
         </dd>
         <dt class="col-sm-2">
             Active
@@ -36,17 +36,17 @@
             @Html.DisplayFor(model => model.Active)
         </dd>
         <dt class="col-sm-2">
-            Projects
+            Locations:
         </dt>
         <dd class="col-sm-10">
-            @foreach (var project in Model.VacancyProjects.Select(vp => vp.Project))
+            @foreach (var location in Model.locations)
             {
-                <p>@project.ProjectName</p>
+                <p>@location.LocationName</p>
             }
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-controller="New_Applicants" asp-action="Create" asp-route-vacancyId="@Model.VacancyId">Apply</a>
+    <a asp-controller="New_Applicants" asp-action="Create" asp-route-vacancyId="@Model.vacancyid">Apply</a>
     <a asp-action="Index">Back to List</a>
 </div>

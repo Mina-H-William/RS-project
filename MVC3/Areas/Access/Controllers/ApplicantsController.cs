@@ -8,12 +8,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using MVC3.Data;
 using MVC3.Areas.Access.Models;
+using MVC3.Areas.Identity.Authorization;
 
 
 
 namespace MVC3.Areas.Access.Controllers
 {
     [Area("Access")]
+    [Permission("Applicant")]
     public class ApplicantsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -30,12 +32,14 @@ namespace MVC3.Areas.Access.Controllers
         }
 
         // GET: Applicants/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, bool toviewsubmission = false)
         {
             if (id == null)
             {
                 return NotFound();
             }
+
+            ViewData["toviewsubmission"] = toviewsubmission;
 
             var applicant = await _context.Applicant
                 .FirstOrDefaultAsync(m => m.ApplicantId == id);
@@ -48,6 +52,7 @@ namespace MVC3.Areas.Access.Controllers
         }
 
         // GET: Applicants/Create
+        [AllowAnonymous]
         public IActionResult Create()
         {
             return View();
@@ -58,6 +63,7 @@ namespace MVC3.Areas.Access.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Create([Bind("ApplicantId,ApplicantFirstName,ApplicantMiddleName,ApplicantLastName,DateOfBirth,EmailAddress,ContactNumber,HomeAddress1,Address2,Nationality,Gender,MilitaryStatus,MaritalStatus,CertificateName,GraduationYear,Major,University,CurrentEmployer,CurrentPosition,CurrentSalary,YearsOfExperience,NoticePeriod,ExtraCertificates")] Applicant applicant)
         {
             if (ModelState.IsValid)
@@ -70,12 +76,14 @@ namespace MVC3.Areas.Access.Controllers
         }
 
         // GET: Applicants/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id,bool toviewsubmission =false)
         {
             if (id == null)
             {
                 return NotFound();
             }
+
+            ViewData["toviewsubmission"] = toviewsubmission;
 
             var applicant = await _context.Applicant.FindAsync(id);
             if (applicant == null)
@@ -90,7 +98,7 @@ namespace MVC3.Areas.Access.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ApplicantId,ApplicantFirstName,ApplicantMiddleName,ApplicantLastName,DateOfBirth,EmailAddress,ContactNumber,HomeAddress1,Address2,Nationality,Gender,MilitaryStatus,MaritalStatus,CertificateName,GraduationYear,Major,University,CurrentEmployer,CurrentPosition,CurrentSalary,YearsOfExperience,NoticePeriod,ExtraCertificates")] Applicant applicant)
+        public async Task<IActionResult> Edit(int id, [Bind("ApplicantId,ApplicantFirstName,ApplicantMiddleName,ApplicantLastName,DateOfBirth,EmailAddress,ContactNumber,HomeAddress1,Address2,Nationality,Gender,MilitaryStatus,MaritalStatus,CertificateName,GraduationYear,Major,University,CurrentEmployer,CurrentPosition,CurrentSalary,YearsOfExperience,NoticePeriod,ExtraCertificates")] Applicant applicant, bool toviewsubmission = false)
         {
             if (id != applicant.ApplicantId)
             {
@@ -115,7 +123,7 @@ namespace MVC3.Areas.Access.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("details",new { id=id , toviewsubmission = toviewsubmission });
             }
             return View(applicant);
         }

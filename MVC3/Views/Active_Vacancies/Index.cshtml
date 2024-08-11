@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Vacancy>
+﻿@model IEnumerable<activeVacanciesViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -15,24 +15,24 @@
 else
 {
 <div class="vacancies-list">
-    @foreach (var vacancy in Model)
+    @foreach (var activevacancy in Model)
     {
         <div class="vacancy-card">
-            <h2>@vacancy.VacancyName</h2>
-            <p>@vacancy.TotalVacancyCount vacancies available</p>
-            <p><strong>Title:</strong> @vacancy.Title.TitleName</p>
+                <h2>@activevacancy.vacancyname</h2>
+                <p>@activevacancy.TotalVacancyCount vacancies available</p>
+                <p><strong>Title:</strong> @activevacancy.TitleName</p>
             <p>
-                <strong>Projects:</strong>
-                @foreach (var project in vacancy.VacancyProjects)
+                <strong>Locations:</strong>
+                    @foreach (var location in activevacancy.locations)
                 {
-                    @project.Project.ProjectName
+                    @location.LocationName
 
                     <br />
                 }
             </p>
-            <p><strong>Status:</strong> @(vacancy.Active ? "Active" : "Inactive")</p>
+            <p><strong>Status:</strong>Active</p>
             <p>
-                <a asp-action="Details" asp-route-id="@vacancy.VacancyId">Apply</a>
+                    <a asp-action="Details" asp-route-id="@activevacancy.vacancyid">Apply</a>
             </p>
         </div>
     }

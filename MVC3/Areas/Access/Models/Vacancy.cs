@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
@@ -9,8 +10,13 @@ namespace MVC3.Areas.Access.Models
     public partial class Vacancy
     {
         public int VacancyId { get; set; }
+
+        [Required]
         public string VacancyName { get; set; }
-        public int? TotalVacancyCount { get; set; }
+
+        [Required]
+        [Range(1,1000)]
+        public int TotalVacancyCount { get; set; }
         public int TitleId { get; set; }
         public bool Active { get; set; }
 

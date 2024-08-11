@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -8,6 +9,8 @@ namespace MVC3.Areas.Access.Models
     {
         public int ApplicantId { get; set; }
         public int VacancyId { get; set; }
+
+        [Required]
         public int ExpectedSalary { get; set; }
         public string HearAboutVacancy { get; set; }
         public string WorkAtCompany { get; set; }

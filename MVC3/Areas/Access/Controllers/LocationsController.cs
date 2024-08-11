@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC3.Data;
 using MVC3.Areas.Access.Models;
+using MVC3.Areas.Identity.Authorization;
 
 namespace MVC3.Areas.Access.Controllers
 {
     [Area("Access")]
+    [Permission("Location")]
     public class LocationsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -64,7 +66,14 @@ namespace MVC3.Areas.Access.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(location);
+                if (await _context.Location.AnyAsync(
+                    l => l.LocationName.ToLower().Equals(location.LocationName.ToLower())
+                    && l.CountryId == location.CountryId))
+                {
+                    ModelState.AddModelError("", "this Location name exist");
+                    return View(location);
+                }
+                await _context.AddAsync(location);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC3.Data;
 using MVC3.Areas.Access.Models;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace MVC3.Controllers
 {
@@ -51,6 +53,12 @@ namespace MVC3.Controllers
         {
             ViewBag.VacancyId = VacancyId;
             ViewBag.Nationalities = new SelectList(_context.Nationalities, "Id", "Name");
+            var jsonModel = HttpContext.Session.GetString("applicant");
+            if (!string.IsNullOrEmpty(jsonModel))
+            {
+                var applicant = JsonConvert.DeserializeObject<Applicant>(jsonModel);
+                return View(applicant);
+            }
             return View();
         }
 
@@ -91,10 +99,23 @@ namespace MVC3.Controllers
 
                     applicant.ResumeFilePath = "/resumes/" + uniqueFileName;
                 }
+                else
+                {
+                    ModelState.AddModelError("", "CV Required");
+                    ViewBag.VacancyId = VacancyId;
+                    ViewBag.Nationalities = new SelectList(_context.Nationalities, "Id", "Name");
+                    return View(applicant);
+                }
 
-                _context.Add(applicant);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Create", "VacancyApplicants", new { applicantId = applicant.ApplicantId, vacancyId = VacancyId });
+
+                var jsonModel = JsonConvert.SerializeObject(applicant);
+
+                // Store the JSON string in TempData
+                HttpContext.Session.SetString("applicant", jsonModel);
+
+                //_context.Add(applicant);
+                //await _context.SaveChangesAsync();
+                return RedirectToAction("Create", "VacancyApplicants", new { vacancyId = VacancyId });
             }
             ViewBag.VacancyId = VacancyId;
             return View(applicant);

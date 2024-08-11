@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using MVC3.Data;
 using MVC3.Areas.Access.Models;
 using MVC3.Models;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 
 namespace MVC3.Controllers
@@ -51,10 +53,17 @@ namespace MVC3.Controllers
         }
 
         // GET: VacancyApplicants/Create
-        public IActionResult Create(int applicantId, int vacancyId)
+        public IActionResult Create(int vacancyId)
         {
-            ViewData["ApplicantId"] = applicantId;
-            ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "LocationId");
+            var locations = _context.VacancyProject
+                .Where(vp => vp.VacancyId == vacancyId)
+                .Select(vp => vp.Project.Location)
+                .Distinct() // Ensure unique locations
+                .ToList();
+
+            // Create a SelectList for these locations
+            ViewData["Locations"] = new SelectList(locations, "LocationId", "LocationName");
+            //ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "LocationName");
             ViewData["VacancyId"] = vacancyId;
             return View();
         }
@@ -62,13 +71,21 @@ namespace MVC3.Controllers
         // POST: VacancyApplicants/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ApplicantId,VacancyId,ExpectedSalary,HearAboutVacancy,WorkAtCompany,RelativeAtCompany,LocationId")] VacancyApplicant vacancyApplicant)
+        public async Task<IActionResult> Create([Bind("VacancyId,ExpectedSalary,HearAboutVacancy,WorkAtCompany,RelativeAtCompany,LocationId")] VacancyApplicant vacancyApplicant)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(vacancyApplicant);
+                var jsonModel = HttpContext.Session.GetString("applicant");
+                var applicant = JsonConvert.DeserializeObject<Applicant>(jsonModel);
+                await _context.AddAsync(applicant);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                HttpContext.Session.Remove("applicant");
+
+                vacancyApplicant.ApplicantId = applicant.ApplicantId;
+                await _context.AddAsync(vacancyApplicant);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
             }
             ViewData["ApplicantId"] = new SelectList(_context.Applicant, "ApplicantId", "ApplicantId", vacancyApplicant.ApplicantId);
             ViewData["LocationId"] = new SelectList(_context.Location, "LocationId", "LocationId", vacancyApplicant.LocationId);
@@ -167,21 +184,19 @@ namespace MVC3.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> ViewSubmissions(int vacancyId)
+        /*public async Task<IActionResult> ViewSubmissions(int Id)
         {
-            ViewBag.VacancyId = vacancyId; // Pass vacancyId to view if needed
-
+            ViewData["vid"]=Id;
             var submissions = await _context.VacancyApplicant
                 .Include(v => v.Applicant)
-                .Where(v => v.VacancyId == vacancyId)
+                .Where(v => v.VacancyId == Id)
                 .Select(v => new
                 {
                     v.Applicant.ApplicantFirstName,
                     v.Applicant.ApplicantLastName,
                     v.Applicant.YearsOfExperience,
                     v.Applicant.ResumeFilePath,
-                    v.Applicant.ApplicantId,
-                    v.VacancyId
+                    v.Applicant.ApplicantId
                 })
                 .ToListAsync();
 
@@ -195,7 +210,6 @@ namespace MVC3.Controllers
                     ApplicantFirstName = sub.ApplicantFirstName,
                     ApplicantLastName = sub.ApplicantLastName,
                     ApplicantId = sub.ApplicantId,
-                    VacancyId = sub.VacancyId,
                     YearsOfExperience = sub.YearsOfExperience,
                     ResumeFilePath = sub.ResumeFilePath
                 };
@@ -203,7 +217,7 @@ namespace MVC3.Controllers
             }
 
             return View(submissionsview);
-        }
+        }*/
 
         private bool VacancyApplicantExists(int vacancyId, int applicantId)
         {

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit";
+    var toviewsubmission = ViewData["toviewsubmission"] as bool?;
 }
 
 <h1>Edit</h1>
@@ -13,6 +14,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ApplicantId" />
+            <input type="hiddem" asp-for="@toviewsubmission"/>
             <div class="form-group">
                 <label asp-for="ApplicantFirstName" class="control-label"></label>
                 <input asp-for="ApplicantFirstName" class="form-control" />
@@ -131,6 +133,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="details" asp-route-id="@Model.ApplicantId" asp-route-toviewsubmission="@toviewsubmission">Back to Details</a>
 </div>
 

@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 namespace MVC3.Areas.Identity.Controllers
 {
     [Area("Identity")]
+    [Permission("Admin")]
     public class AdminstrationController : Controller
     {
         private readonly RoleManager<ApplicationRole> roleManager;
