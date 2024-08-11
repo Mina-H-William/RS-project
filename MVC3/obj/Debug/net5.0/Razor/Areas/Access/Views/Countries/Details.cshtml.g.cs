@@ -28,12 +28,18 @@ using MVC3.Areas.Identity.Services
 #line 3 "D:\RS-project\MVC3\Areas\Access\Views\_ViewImports.cshtml"
 using Microsoft.AspNetCore.Identity
 
+#nullable disable
+    ;
+#nullable restore
+#line 4 "D:\RS-project\MVC3\Areas\Access\Views\_ViewImports.cshtml"
+using MVC3.Areas.Identity.Models
+
 #line default
 #line hidden
 #nullable disable
     ;
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"574cd81fc9f79cfc745ed437a20f0b5d06adf60d046223612b91757e1f0bc8f9", @"/Areas/Access/Views/Countries/Details.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"c75cf937f9d1e520cfeff6214b57714dd2cbc1fd314daa0856edfbaf165655e0", @"/Areas/Access/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"04dd7fb1b53428699f5dd17a60fd612f6b2a2b982ce897eb6f62ea2dddfd2d8d", @"/Areas/Access/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Areas_Access_Views_Countries_Details : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Country>
     #nullable disable
@@ -115,7 +121,7 @@ using Microsoft.AspNetCore.Identity
 #nullable disable
             );
             WriteLiteral("\r\n        </dd>\r\n    </dl>\r\n</div>\r\n<div>\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "574cd81fc9f79cfc745ed437a20f0b5d06adf60d046223612b91757e1f0bc8f95753", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "574cd81fc9f79cfc745ed437a20f0b5d06adf60d046223612b91757e1f0bc8f95903", async() => {
                 WriteLiteral("Edit");
             }
             );
@@ -148,7 +154,7 @@ using Microsoft.AspNetCore.Identity
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral(" |\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "574cd81fc9f79cfc745ed437a20f0b5d06adf60d046223612b91757e1f0bc8f97950", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "574cd81fc9f79cfc745ed437a20f0b5d06adf60d046223612b91757e1f0bc8f98100", async() => {
                 WriteLiteral("Back to List");
             }
             );

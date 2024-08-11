@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Areas\Access\Views\Shared\LoginPartial.cshtml" />
+    <Content Remove="Areas\Identity\Views\Shared\LoginPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.17" />
@@ -22,6 +27,19 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\resumes\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Identity\Views\Shared\LoginPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Identity\Views\Shared\LoginPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Access\Views\Shared\LoginPartial.cshtml" />
+    <None Include="Areas\Identity\Views\Shared\LoginPartial.cshtml" />
   </ItemGroup>
 
 </Project>

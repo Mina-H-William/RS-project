@@ -10,45 +10,36 @@
 
 <h1>All Roles</h1>
 
-@if (Model.Any())
+@if (Model.Any() && Model.Count() > 1)
 {
     <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole"
        asp-controller="Adminstration" asp-area="identity">Add new role</a>
 
-    foreach (var role in Model)
-    {
-        <div class="card mb-3">
-            <div class="card-header">
-                Role Id : @role.Id
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">@role.Name</h5>
-            </div>
-            <div class="card-footer">
-                <form asp-action="DeleteRole" asp-controller="Adminstration" asp-area="identity" asp-route-id="@role.Id" method="post">
-
-                    @* @if ((await authorizationService.AuthorizeAsync(User, "EditRolePolicy")).Succeeded)
-                    { *@
-                        <a class="btn btn-primary" asp-action="EditRole"
-                           asp-controller="Adminstration" asp-area="identity" asp-route-id="@role.Id">
-                            Edit
-                        </a>
-                    @* } *@
-                    <span id="confirmDeleteSpan_@role.Id" style="display:none">
-                        <span>Are you sure you want to delete?</span>
-                        <button type="submit" class="btn btn-danger">Yes</button>
-                        <a href="#" class="btn btn-primary"
-                           onclick="confirmDelete('@role.Id', false)">No</a>
-                    </span>
-
-                    <span id="deleteSpan_@role.Id">
-                        <a href="#" class="btn btn-danger"
-                           onclick="confirmDelete('@role.Id', true)">Delete</a>
-                    </span>
-                </form>
-            </div>
-        </div>
-    }
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Role Name</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model)
+            {
+                @if (role.Name != "Admin")
+                {
+                    <tr>
+                        <td>@role.Name</td>
+                        <td>
+                            <a class="btn btn-primary" asp-action="EditRole"
+                               asp-controller="Adminstration" asp-area="identity" asp-route-id="@role.Id">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
 }
 else
 {

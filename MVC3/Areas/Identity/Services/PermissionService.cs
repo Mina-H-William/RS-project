@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MVC3.Areas.Identity.Models;
 using MVC3.Data;
 using System.Linq;
 using System.Security.Claims;
@@ -9,10 +10,10 @@ namespace MVC3.Areas.Identity.Services
 {
     public class PermissionService
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public PermissionService(UserManager<IdentityUser> userManager, ApplicationDbContext context)
+        public PermissionService(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _context = context;

@@ -10,11 +10,11 @@ namespace MVC3.Areas.Identity.Authorization
 {
     public class PermissionHandler : AuthorizationHandler<PermissionRequirement>
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly ApplicationDbContext _context;
 
-        public PermissionHandler(UserManager<IdentityUser> userManager, RoleManager<ApplicationRole> roleManager,
+        public PermissionHandler(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,
                                 ApplicationDbContext context)
         {
             _userManager = userManager;

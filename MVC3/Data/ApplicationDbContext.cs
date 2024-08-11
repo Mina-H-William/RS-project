@@ -12,7 +12,7 @@ using System.Text;
 
 namespace MVC3.Data
 {
-    public partial class ApplicationDbContext : IdentityDbContext
+    public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -127,7 +127,7 @@ namespace MVC3.Data
                 .WithMany(p => p.RolePermissions)
                 .HasForeignKey(rp => rp.PermissionId);
 
-            // Seed initial permissions data
+            // initial permissions data
             modelBuilder.Entity<Permission>().HasData(
                 new Permission { Id = 1, Name = "Admin" },
                 new Permission { Id = 2, Name = "Applicant" },
@@ -139,8 +139,55 @@ namespace MVC3.Data
                 new Permission { Id = 8, Name = "Location" }
             );
             ////////////////
+            ////////////////////create role admin and user and assign all permissions to this role /////////////
+
+            var hasher = new PasswordHasher<ApplicationUser>();
+
+            // Create Admin Role
+            var adminRoleId = "1"; // Assign an ID to the Admin role
+            var adminUserId = "1"; // Assign an ID to the Admin user
+            modelBuilder.Entity<ApplicationRole>().HasData(new ApplicationRole
+            {
+                Id = adminRoleId,
+                Name = "Admin",
+                NormalizedName = "ADMIN"
+            });
+
+            // Create Admin User
+            modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            {
+                Id = adminUserId,
+                UserName = "admin@gmail.com",
+                NormalizedUserName = "ADMIN@GMAIL.COM",
+                Email = "admin@gmail.com",
+                NormalizedEmail = "ADMIN@GMAIL.COM",
+                EmailConfirmed = false,
+                PasswordHash = hasher.HashPassword(null, "Admin@123"),
+                SecurityStamp = string.Empty,
+                Active = true
+            });
+
+            // Assign Admin Role to Admin User
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = adminRoleId,
+                UserId = adminUserId
+            });
+
+            // Assign All Permissions to Admin Role
+            var permissions = new List<RolePermission>();
+            for (int i = 1; i <= 8; i++)
+            {
+                permissions.Add(new RolePermission
+                {
+                    RoleId = adminRoleId,
+                    PermissionId = i
+                });
+            }
+            modelBuilder.Entity<RolePermission>().HasData(permissions.ToArray());
 
 
+            //////////////////
 
             OnModelCreatingPartial(modelBuilder);
         }

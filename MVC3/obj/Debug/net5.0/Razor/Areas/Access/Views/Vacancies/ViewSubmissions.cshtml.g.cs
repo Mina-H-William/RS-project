@@ -28,12 +28,18 @@ using MVC3.Areas.Identity.Services
 #line 3 "D:\RS-project\MVC3\Areas\Access\Views\_ViewImports.cshtml"
 using Microsoft.AspNetCore.Identity
 
+#nullable disable
+    ;
+#nullable restore
+#line 4 "D:\RS-project\MVC3\Areas\Access\Views\_ViewImports.cshtml"
+using MVC3.Areas.Identity.Models
+
 #line default
 #line hidden
 #nullable disable
     ;
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"c00dd7d90da05529059ee7f48967ace99490cc0dbb3ea6d356181a63d1ba0d79", @"/Areas/Access/Views/Vacancies/ViewSubmissions.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"c75cf937f9d1e520cfeff6214b57714dd2cbc1fd314daa0856edfbaf165655e0", @"/Areas/Access/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"04dd7fb1b53428699f5dd17a60fd612f6b2a2b982ce897eb6f62ea2dddfd2d8d", @"/Areas/Access/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Areas_Access_Views_Vacancies_ViewSubmissions : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<SubmissionViewModel>>
     #nullable disable

@@ -28,12 +28,18 @@ using MVC3.Areas.Identity.Services
 #line 3 "D:\RS-project\MVC3\Areas\Access\Views\_ViewImports.cshtml"
 using Microsoft.AspNetCore.Identity
 
+#nullable disable
+    ;
+#nullable restore
+#line 4 "D:\RS-project\MVC3\Areas\Access\Views\_ViewImports.cshtml"
+using MVC3.Areas.Identity.Models
+
 #line default
 #line hidden
 #nullable disable
     ;
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"ad3a3162c9f61518c7f5adf7cbc42a47a3fee5e6c72a303b272069b8a193f191", @"/Areas/Access/Views/Locations/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"c75cf937f9d1e520cfeff6214b57714dd2cbc1fd314daa0856edfbaf165655e0", @"/Areas/Access/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"04dd7fb1b53428699f5dd17a60fd612f6b2a2b982ce897eb6f62ea2dddfd2d8d", @"/Areas/Access/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Areas_Access_Views_Locations_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Location>>
     #nullable disable
@@ -81,7 +87,7 @@ using Microsoft.AspNetCore.Identity
 #nullable disable
 
             WriteLiteral("\r\n<h1>Locations</h1>\r\n\r\n<p>\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ad3a3162c9f61518c7f5adf7cbc42a47a3fee5e6c72a303b272069b8a193f1916336", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ad3a3162c9f61518c7f5adf7cbc42a47a3fee5e6c72a303b272069b8a193f1916486", async() => {
                 WriteLiteral("Create New");
             }
             );
@@ -147,7 +153,7 @@ using Microsoft.AspNetCore.Identity
 #nullable disable
             );
             WriteLiteral("\r\n                    </td>\r\n                    <td>\r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ad3a3162c9f61518c7f5adf7cbc42a47a3fee5e6c72a303b272069b8a193f1919055", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ad3a3162c9f61518c7f5adf7cbc42a47a3fee5e6c72a303b272069b8a193f1919205", async() => {
                 WriteLiteral("Edit");
             }
             );
@@ -181,7 +187,7 @@ using Microsoft.AspNetCore.Identity
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral(" \r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ad3a3162c9f61518c7f5adf7cbc42a47a3fee5e6c72a303b272069b8a193f19111372", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ad3a3162c9f61518c7f5adf7cbc42a47a3fee5e6c72a303b272069b8a193f19111522", async() => {
                 WriteLiteral("Details");
             }
             );
@@ -215,7 +221,7 @@ using Microsoft.AspNetCore.Identity
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral(" \r\n                        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ad3a3162c9f61518c7f5adf7cbc42a47a3fee5e6c72a303b272069b8a193f19113696", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ad3a3162c9f61518c7f5adf7cbc42a47a3fee5e6c72a303b272069b8a193f19113846", async() => {
                 WriteLiteral("Delete");
             }
             );

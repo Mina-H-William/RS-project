@@ -1,6 +1,4 @@
-﻿@inject SignInManager<IdentityUser> signInManager;
-@inject PermissionService ps;
-
+﻿
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,58 +26,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="identity" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (signInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Access" asp-controller="Home" asp-action="Index">Access</a>
-                            </li>
-                        }
-                        @if (signInManager.IsSignedIn(User) && await ps.UserHasPermissionAsync(User, "Admin"))
-                        {
-                            <li class="nav-item d-flex">
-                                <div class="btn-group align-items-center">
-                                    <button type="button" class="dropdown-toggle" style="color:black; background-color: white; border:none" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Admin
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a class="dropdown-item" asp-area="identity" asp-controller="Adminstration" asp-action="listroles">
-                                                Roles
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" asp-action="listusers" asp-area="identity" asp-controller="Adminstration">
-                                                Users
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        }
+                        <partial name="AdminPartial"/>
+                        <partial name="AcessPartial"/>
                     </ul>
-                    <ul class="navbar-nav ml-auto">
-                        @if (signInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item">
-                                <form method="post" asp-action="Logout" asp-controller="account" asp-area="identity">
-                                    <button type="submit" class="nav-link btn btn-link py-0"
-                                            style="width:auto">
-                                        Logout @User.Identity.Name
-                                    </button>
-                                </form>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a asp-action="Register" asp-controller="account" asp-area="identity" class="nav-link">Register</a>
-                            </li>
-                            <li class="nav-item">
-                                <a asp-action="Login" asp-controller="account" asp-area="identity" class="nav-link">Login</a>
-                            </li>
-                        }
-
-                    </ul>
+                    <partial name="LoginPartial" />
                 </div>
             </div>
         </nav>
@@ -121,5 +71,8 @@
             }
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

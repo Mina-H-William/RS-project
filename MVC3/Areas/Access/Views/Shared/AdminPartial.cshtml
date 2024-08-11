@@ -1,0 +1,26 @@
+﻿@inject SignInManager<ApplicationUser> signInManager;
+@inject PermissionService ps;
+
+
+@if (signInManager.IsSignedIn(User) && await ps.UserHasPermissionAsync(User, "Admin"))
+{
+    <li class="nav-item d-flex">
+        <div class="btn-group align-items-center">
+            <button type="button" class="dropdown-toggle" style="color:black; background-color: white; border:none" data-bs-toggle="dropdown" aria-expanded="false">
+                Admin
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" asp-area="identity" asp-controller="Adminstration" asp-action="listroles">
+                        Roles
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-action="listusers" asp-area="identity" asp-controller="Adminstration">
+                        Users
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+}

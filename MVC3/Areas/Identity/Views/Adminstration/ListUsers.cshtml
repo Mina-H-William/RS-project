@@ -1,4 +1,5 @@
-﻿@model IEnumerable<IdentityUser>
+﻿@inject UserManager<ApplicationUser> UserManager;
+@model IEnumerable<ApplicationUser>
 
 @{
     ViewBag.Title = "All Users";
@@ -13,37 +14,45 @@
         Add new user
     </a>
 
-    foreach (var user in Model)
-    {
-        <div class="card mb-3">
-            <div class="card-header">
-                User Id : @user.Id
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">@user.UserName</h5>
-            </div>
-            <div class="card-footer d-flex">
-                <a asp-action="EditRolesInUser" asp-controller="adminstration" asp-area="identity" asp-route-id="@user.Id"
-                   class="btn btn-primary mb-3 mr-3" style="width:auto">
-                    Edit User Roles
-                </a>
-                <form asp-action="DeleteUser" asp-controller="Adminstration" asp-area="identity" asp-route-id="@user.Id" method="post">
-                    
-                    <span id="confirmDeleteSpan_@user.Id" style="display:none; margin:5px;">
-                        <span>Are you sure you want to delete?</span>
-                        <button type="submit" class="btn btn-danger">Yes</button>
-                        <a href="#" class="btn btn-primary"
-                           onclick="confirmDelete('@user.Id', false)">No</a>
-                    </span>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="width: 50%;">User Name</th>
+                <th>Edit Roles</th>
+                <th>User Active</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                var rowClass = user.Active ? "" : "table-secondary";
+                <tr class="@rowClass">
+                    <td>@user.UserName</td>
+                    <td>
+                        <a asp-action="EditRolesInUser" asp-controller="adminstration" asp-area="identity" asp-route-id="@user.Id"
+                           class="btn btn-primary">
+                            Edit User Roles
+                        </a>
+                    </td>
+                    <td>
+                        <form method="post" asp-action="UpdateActive" asp-controller="adminstration" asp-area="identity">
+                            <input type="hidden" name="userId" value="@user.Id" />
 
-                    <span id="deleteSpan_@user.Id">
-                        <a href="#" class="btn btn-danger"
-                           onclick="confirmDelete('@user.Id', true)">Delete</a>
-                    </span>
-                </form>
-            </div>
-        </div>
-    }
+                            <div class="form-check d-flex justify-content-between align-items-center" style="width:100%;">
+                                <input type="checkbox" class="form-check-input" name="active" value="true" @(user.Active ? "checked" : "")
+                                @(await UserManager.IsInRoleAsync(user, "Admin") ? "disabled" : "") />
+                                <label class="mt-2" for="activeCheckbox">Active</label>
+                                @if (!await UserManager.IsInRoleAsync(user, "Admin"))
+                                {
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                }
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {

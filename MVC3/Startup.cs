@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MVC3.Areas.Identity.Authorization;
+using MVC3.Areas.Identity.CustomMiddleware;
 using MVC3.Areas.Identity.Models;
 using MVC3.Areas.Identity.Services;
 using MVC3.Data;
@@ -43,7 +44,7 @@ namespace MVC3
                          .LogTo(Console.WriteLine, LogLevel.Information));
 
 
-            services.AddIdentity<IdentityUser, ApplicationRole>(/*options => options.SignIn.RequireConfirmedAccount = true*/)
+            services.AddIdentity<ApplicationUser, ApplicationRole>(/*options => options.SignIn.RequireConfirmedAccount = true*/)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.ConfigureApplicationCookie(options =>
@@ -84,6 +85,7 @@ namespace MVC3
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -102,6 +104,9 @@ namespace MVC3
 
             app.UseAuthentication();
             app.UseAuthorization();
+            //// custom middleware to inactive users /////////////
+            app.UseMiddleware<CheckUserActiveMiddleware>();
+            ///
 
             app.UseSession();
 
@@ -114,6 +119,7 @@ namespace MVC3
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

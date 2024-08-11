@@ -1,0 +1,71 @@
+﻿@inject SignInManager<ApplicationUser> signInManager;
+@inject PermissionService ps;
+
+
+@if (signInManager.IsSignedIn(User))
+{
+    <li class="nav-item d-flex">
+        <div class="btn-group align-items-center">
+            <button type="button" class="dropdown-toggle" style="color:black; background-color: white; border:none" data-bs-toggle="dropdown" aria-expanded="false">
+                Tracking
+            </button>
+            <ul class="dropdown-menu">
+                @if (signInManager.IsSignedIn(User) && await ps.UserHasPermissionAsync(User, "Applicant"))
+                {
+                    <li>
+                        <a class="dropdown-item" asp-area="Access" asp-controller="Applicants" asp-action="Index">
+                            Applicants
+                        </a>
+                    </li>
+                }
+                @if (signInManager.IsSignedIn(User) && await ps.UserHasPermissionAsync(User, "Vacancy"))
+                {
+                    <li>
+                        <a class="dropdown-item" asp-area="Access" asp-controller="Vacancies" asp-action="Index">
+                            Vacancies
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item d-flex">
+        <div class="btn-group align-items-center">
+            <button type="button" class="dropdown-toggle" style="color:black; background-color: white; border:none" data-bs-toggle="dropdown" aria-expanded="false">
+                Menu
+            </button>
+            <ul class="dropdown-menu">
+                @if (signInManager.IsSignedIn(User) && await ps.UserHasPermissionAsync(User, "Country"))
+                {
+                    <li>
+                        <a class="dropdown-item" asp-area="Access" asp-controller="Countries" asp-action="Index">Countries</a>
+                    </li>
+                }
+                @if (signInManager.IsSignedIn(User) && await ps.UserHasPermissionAsync(User, "Location"))
+                {
+                    <li>
+                        <a class="dropdown-item" asp-area="Access" asp-controller="Locations" asp-action="Index">Locations</a>
+                    </li>
+                }
+                @if (signInManager.IsSignedIn(User) && await ps.UserHasPermissionAsync(User, "Department"))
+                {
+                    <li>
+                        <a class="dropdown-item" asp-area="Access" asp-controller="Departments" asp-action="Index">Departments</a>
+                    </li>
+                }
+                @if (signInManager.IsSignedIn(User) && await ps.UserHasPermissionAsync(User, "Title"))
+                {
+                    <li>
+                        <a class="dropdown-item" asp-area="Access" asp-controller="Titles" asp-action="Index">Titles</a>
+                    </li>
+                }
+                @if (signInManager.IsSignedIn(User) && await ps.UserHasPermissionAsync(User, "Project"))
+                {
+                    <li>
+                        <a class="dropdown-item" asp-area="Access" asp-controller="Projects" asp-action="Index">Projects</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </li>
+}

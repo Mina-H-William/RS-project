@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVC3.Areas.Identity.Authorization;
+using MVC3.Areas.Identity.Models;
 using MVC3.Areas.Identity.ViewModels;
 using System.Threading.Tasks;
 
@@ -11,11 +12,11 @@ namespace MVC3.Areas.Identity.Controllers
     [Area("Identity")]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -32,7 +33,7 @@ namespace MVC3.Areas.Identity.Controllers
             return View();
         }
 
-        [HttpPost]
+
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
@@ -60,12 +61,31 @@ namespace MVC3.Areas.Identity.Controllers
             }
         }
 
+        [AcceptVerbs("Get", "Post")]
+        public async Task<IActionResult> IsEmailAcive(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                return Json($"This email doesn't exist");
+            }
+            else
+            {
+                if(!user.Active)
+                {
+                    return Json($"This email is not active");
+                }
+                return Json(true);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser
+                var user = new ApplicationUser
                 {
                     UserName = model.Email,
                     Email = model.Email

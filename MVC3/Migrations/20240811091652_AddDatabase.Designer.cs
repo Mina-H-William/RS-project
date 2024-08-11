@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240805074014_AddMigration")]
-    partial class AddMigration
+    [Migration("20240811091652_AddDatabase")]
+    partial class AddDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,44 +22,7 @@ namespace MVC3.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("MVC3.Areas.Identity.Models.Permission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Permissions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Create"
-                        });
-                });
-
-            modelBuilder.Entity("MVC3.Areas.Identity.Models.RolePermission", b =>
-                {
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RoleId", "PermissionId");
-
-                    b.HasIndex("PermissionId");
-
-                    b.ToTable("RolePermissions");
-                });
-
-            modelBuilder.Entity("MVC3.Models.Applicant", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Applicant", b =>
                 {
                     b.Property<int>("ApplicantId")
                         .ValueGeneratedOnAdd()
@@ -156,7 +119,7 @@ namespace MVC3.Migrations
                     b.ToTable("Applicant");
                 });
 
-            modelBuilder.Entity("MVC3.Models.Country", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Country", b =>
                 {
                     b.Property<int>("CountryId")
                         .ValueGeneratedOnAdd()
@@ -164,17 +127,21 @@ namespace MVC3.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CountryCode")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
 
                     b.Property<string>("CountryName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("CountryId");
 
                     b.ToTable("Country");
                 });
 
-            modelBuilder.Entity("MVC3.Models.Department", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Department", b =>
                 {
                     b.Property<int>("DepartmentId")
                         .ValueGeneratedOnAdd()
@@ -182,17 +149,21 @@ namespace MVC3.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("DepartmentCode")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("DepartmentName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("DepartmentId");
 
                     b.ToTable("Department");
                 });
 
-            modelBuilder.Entity("MVC3.Models.Location", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Location", b =>
                 {
                     b.Property<int>("LocationId")
                         .ValueGeneratedOnAdd()
@@ -203,7 +174,9 @@ namespace MVC3.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("LocationName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("LocationId");
 
@@ -212,7 +185,7 @@ namespace MVC3.Migrations
                     b.ToTable("Location");
                 });
 
-            modelBuilder.Entity("MVC3.Models.Nationality", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Nationality", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -220,6 +193,7 @@ namespace MVC3.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -254,7 +228,7 @@ namespace MVC3.Migrations
                         });
                 });
 
-            modelBuilder.Entity("MVC3.Models.Project", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Project", b =>
                 {
                     b.Property<int>("ProjectId")
                         .ValueGeneratedOnAdd()
@@ -268,6 +242,7 @@ namespace MVC3.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ProjectName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ProjectId");
@@ -277,7 +252,7 @@ namespace MVC3.Migrations
                     b.ToTable("Project");
                 });
 
-            modelBuilder.Entity("MVC3.Models.Title", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Title", b =>
                 {
                     b.Property<int>("TitleId")
                         .ValueGeneratedOnAdd()
@@ -288,6 +263,7 @@ namespace MVC3.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TitleName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TitleId");
@@ -297,7 +273,7 @@ namespace MVC3.Migrations
                     b.ToTable("Title");
                 });
 
-            modelBuilder.Entity("MVC3.Models.Vacancy", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Vacancy", b =>
                 {
                     b.Property<int>("VacancyId")
                         .ValueGeneratedOnAdd()
@@ -316,10 +292,11 @@ namespace MVC3.Migrations
                     b.Property<int>("TitleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TotalVacancyCount")
+                    b.Property<int>("TotalVacancyCount")
                         .HasColumnType("int");
 
                     b.Property<string>("VacancyName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("VacancyId");
@@ -329,7 +306,7 @@ namespace MVC3.Migrations
                     b.ToTable("Vacancy");
                 });
 
-            modelBuilder.Entity("MVC3.Models.VacancyApplicant", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.VacancyApplicant", b =>
                 {
                     b.Property<int>("VacancyId")
                         .HasColumnType("int");
@@ -361,7 +338,7 @@ namespace MVC3.Migrations
                     b.ToTable("VacancyApplicant");
                 });
 
-            modelBuilder.Entity("MVC3.Models.VacancyProject", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.VacancyProject", b =>
                 {
                     b.Property<int>("VacancyId")
                         .HasColumnType("int");
@@ -377,6 +354,207 @@ namespace MVC3.Migrations
                     b.HasIndex("ProjectId");
 
                     b.ToTable("VacancyProject");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Identity.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            Active = true,
+                            ConcurrencyStamp = "69844cf1-3b6e-443f-92ce-6d07a8e58db2",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAECzkGOa+quMOP01PQ2Adx2doMbTilX5t6+vKN3MzBWcnZACdDmrOEBBHx9bIYUHQBQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@gmail.com"
+                        });
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Identity.Models.Permission", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Permissions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Applicant"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Country"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Vacancy"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Title"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Project"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Department"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Location"
+                        });
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Identity.Models.RolePermission", b =>
+                {
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("PermissionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RoleId", "PermissionId");
+
+                    b.HasIndex("PermissionId");
+
+                    b.ToTable("RolePermissions");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = "1",
+                            PermissionId = 1
+                        },
+                        new
+                        {
+                            RoleId = "1",
+                            PermissionId = 2
+                        },
+                        new
+                        {
+                            RoleId = "1",
+                            PermissionId = 3
+                        },
+                        new
+                        {
+                            RoleId = "1",
+                            PermissionId = 4
+                        },
+                        new
+                        {
+                            RoleId = "1",
+                            PermissionId = 5
+                        },
+                        new
+                        {
+                            RoleId = "1",
+                            PermissionId = 6
+                        },
+                        new
+                        {
+                            RoleId = "1",
+                            PermissionId = 7
+                        },
+                        new
+                        {
+                            RoleId = "1",
+                            PermissionId = 8
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -434,71 +612,6 @@ namespace MVC3.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -560,6 +673,13 @@ namespace MVC3.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -586,6 +706,105 @@ namespace MVC3.Migrations
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
 
                     b.HasDiscriminator().HasValue("ApplicationRole");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "9c8556df-9165-4271-b1bc-ba9e3c408e16",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Location", b =>
+                {
+                    b.HasOne("MVC3.Areas.Access.Models.Country", "Country")
+                        .WithMany("Locations")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Project", b =>
+                {
+                    b.HasOne("MVC3.Areas.Access.Models.Location", "Location")
+                        .WithMany("Projects")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Title", b =>
+                {
+                    b.HasOne("MVC3.Areas.Access.Models.Department", "Department")
+                        .WithMany("Titles")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Vacancy", b =>
+                {
+                    b.HasOne("MVC3.Areas.Access.Models.Title", "Title")
+                        .WithMany("Vacancies")
+                        .HasForeignKey("TitleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Title");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Access.Models.VacancyApplicant", b =>
+                {
+                    b.HasOne("MVC3.Areas.Access.Models.Applicant", "Applicant")
+                        .WithMany("VacancyApplicants")
+                        .HasForeignKey("ApplicantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVC3.Areas.Access.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVC3.Areas.Access.Models.Vacancy", "Vacancy")
+                        .WithMany()
+                        .HasForeignKey("VacancyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Applicant");
+
+                    b.Navigation("Location");
+
+                    b.Navigation("Vacancy");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Access.Models.VacancyProject", b =>
+                {
+                    b.HasOne("MVC3.Areas.Access.Models.Project", "Project")
+                        .WithMany("VacancyProjects")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVC3.Areas.Access.Models.Vacancy", "Vacancy")
+                        .WithMany("VacancyProjects")
+                        .HasForeignKey("VacancyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
+
+                    b.Navigation("Vacancy");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Identity.Models.RolePermission", b =>
@@ -607,96 +826,6 @@ namespace MVC3.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("MVC3.Models.Location", b =>
-                {
-                    b.HasOne("MVC3.Models.Country", "Country")
-                        .WithMany("Locations")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("MVC3.Models.Project", b =>
-                {
-                    b.HasOne("MVC3.Models.Location", "Location")
-                        .WithMany("Projects")
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Location");
-                });
-
-            modelBuilder.Entity("MVC3.Models.Title", b =>
-                {
-                    b.HasOne("MVC3.Models.Department", "Department")
-                        .WithMany("Titles")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-                });
-
-            modelBuilder.Entity("MVC3.Models.Vacancy", b =>
-                {
-                    b.HasOne("MVC3.Models.Title", "Title")
-                        .WithMany("Vacancies")
-                        .HasForeignKey("TitleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Title");
-                });
-
-            modelBuilder.Entity("MVC3.Models.VacancyApplicant", b =>
-                {
-                    b.HasOne("MVC3.Models.Applicant", "Applicant")
-                        .WithMany("VacancyApplicants")
-                        .HasForeignKey("ApplicantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MVC3.Models.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MVC3.Models.Vacancy", "Vacancy")
-                        .WithMany()
-                        .HasForeignKey("VacancyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Applicant");
-
-                    b.Navigation("Location");
-
-                    b.Navigation("Vacancy");
-                });
-
-            modelBuilder.Entity("MVC3.Models.VacancyProject", b =>
-                {
-                    b.HasOne("MVC3.Models.Project", "Project")
-                        .WithMany("VacancyProjects")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MVC3.Models.Vacancy", "Vacancy")
-                        .WithMany("VacancyProjects")
-                        .HasForeignKey("VacancyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Project");
-
-                    b.Navigation("Vacancy");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -708,7 +837,7 @@ namespace MVC3.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MVC3.Areas.Identity.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -717,7 +846,7 @@ namespace MVC3.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MVC3.Areas.Identity.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -732,7 +861,7 @@ namespace MVC3.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MVC3.Areas.Identity.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -741,51 +870,51 @@ namespace MVC3.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                    b.HasOne("MVC3.Areas.Identity.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MVC3.Areas.Identity.Models.Permission", b =>
-                {
-                    b.Navigation("RolePermissions");
-                });
-
-            modelBuilder.Entity("MVC3.Models.Applicant", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Applicant", b =>
                 {
                     b.Navigation("VacancyApplicants");
                 });
 
-            modelBuilder.Entity("MVC3.Models.Country", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Country", b =>
                 {
                     b.Navigation("Locations");
                 });
 
-            modelBuilder.Entity("MVC3.Models.Department", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Department", b =>
                 {
                     b.Navigation("Titles");
                 });
 
-            modelBuilder.Entity("MVC3.Models.Location", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Location", b =>
                 {
                     b.Navigation("Projects");
                 });
 
-            modelBuilder.Entity("MVC3.Models.Project", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Project", b =>
                 {
                     b.Navigation("VacancyProjects");
                 });
 
-            modelBuilder.Entity("MVC3.Models.Title", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Title", b =>
                 {
                     b.Navigation("Vacancies");
                 });
 
-            modelBuilder.Entity("MVC3.Models.Vacancy", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.Vacancy", b =>
                 {
                     b.Navigation("VacancyProjects");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Identity.Models.Permission", b =>
+                {
+                    b.Navigation("RolePermissions");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Identity.Models.ApplicationRole", b =>

@@ -7,6 +7,7 @@ using MVC3.Areas.Identity.Authorization;
 using MVC3.Areas.Identity.Models;
 using MVC3.Areas.Identity.ViewModels;
 using MVC3.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -19,11 +20,11 @@ namespace MVC3.Areas.Identity.Controllers
     public class AdminstrationController : Controller
     {
         private readonly RoleManager<ApplicationRole> roleManager;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly ApplicationDbContext _dbcontext;
 
         public AdminstrationController(RoleManager<ApplicationRole> roleManager,
-                                       UserManager<IdentityUser> userManager,
+                                       UserManager<ApplicationUser> userManager,
                                        ApplicationDbContext dbcontext)
         {
             this.roleManager = roleManager;
@@ -92,6 +93,29 @@ namespace MVC3.Areas.Identity.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateActive(string userId, bool active)
+        {
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            user.Active = active; // Update the Active status
+            var result = await userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                // Redirect to ListUsers action after updating the user
+                return RedirectToAction("ListUsers");
+            }
+            else
+            {
+                // Handle errors, maybe show an error view or message
+                return View("Error"); // You can return an error view or handle accordingly
+            }
+        }
+
         [HttpGet]
         public IActionResult ListUsers()
         {
@@ -143,7 +167,7 @@ namespace MVC3.Areas.Identity.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditRolesInUser(List<UserRolesViewModel> model,string id)
+        public async Task<IActionResult> EditRolesInUser(List<UserRolesViewModel> model, string id)
         {
             var user = await userManager.FindByIdAsync(id);
 
