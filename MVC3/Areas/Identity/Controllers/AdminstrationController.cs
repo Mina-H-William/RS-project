@@ -472,7 +472,7 @@ namespace MVC3.Areas.Identity.Controllers
 
                     return View("ListRoles");
                 }
-                catch (DbUpdateException ex)
+                catch (SystemException ex)
                 {
                     ViewBag.ErrorTitle = $"{role.Name} role is in use";
                     ViewBag.ErrorMessage = $"{role.Name} role cannot be deleted as there are users " +

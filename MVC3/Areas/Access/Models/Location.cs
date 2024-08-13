@@ -24,6 +24,7 @@ namespace MVC3.Areas.Access.Models
 
         //public string CountryCode { get; set; }
 
+
         public virtual Country Country { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
     }

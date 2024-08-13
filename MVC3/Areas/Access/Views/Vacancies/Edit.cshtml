@@ -13,6 +13,8 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="VacancyId" />
+            <input asp-for="@Model.AddedBy" type="hidden" />
+            <input asp-for="@Model.AddedTime" type="hidden" />
             <div class="form-group">
                 <label asp-for="VacancyName" class="control-label"></label>
                 <input asp-for="VacancyName" class="form-control" />
@@ -34,8 +36,8 @@
                 <span asp-validation-for="SelectedProjectIds" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Active" class="control-label"></label>
-                <input asp-for="Active" class="form-control" />
+                <label asp-for="Active" />
+                <input asp-for="Active" />
                 <span asp-validation-for="Active" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -50,9 +52,9 @@
 </div>
 
 
-    <script>
-        $(document).ready(function () {
-            $('.js-example-basic-multiple').select2();
-        });
-    </script>
+<script>
+    $(document).ready(function () {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
 

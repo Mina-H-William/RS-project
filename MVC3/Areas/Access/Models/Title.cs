@@ -20,6 +20,7 @@ namespace MVC3.Areas.Access.Models
         public string TitleName { get; set; }
         public int DepartmentId { get; set; }
 
+
         public virtual Department Department { get; set; }
         public virtual ICollection<Vacancy> Vacancies { get; set; }
     }

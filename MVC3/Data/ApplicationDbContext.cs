@@ -21,6 +21,7 @@ namespace MVC3.Data
 
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<question> questions { get; set; }
         public DbSet<Applicant> Applicants { get; set; }
         public virtual DbSet<Applicant> Applicant { get; set; }
         public virtual DbSet<Country> Country { get; set; }

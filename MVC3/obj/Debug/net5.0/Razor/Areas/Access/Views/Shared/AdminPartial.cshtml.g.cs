@@ -34,12 +34,18 @@ using Microsoft.AspNetCore.Identity
 #line 4 "D:\RS-project\MVC3\Areas\Access\Views\_ViewImports.cshtml"
 using MVC3.Areas.Identity.Models
 
+#nullable disable
+    ;
+#nullable restore
+#line 5 "D:\RS-project\MVC3\Areas\Access\Views\_ViewImports.cshtml"
+using MVC3.Areas.Access.ViewModels
+
 #line default
 #line hidden
 #nullable disable
     ;
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"d932b2889ecdc8c3adc274fd39a570bd44e5b8e8cc98ce68deb6e26e5f732174", @"/Areas/Access/Views/Shared/AdminPartial.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"04dd7fb1b53428699f5dd17a60fd612f6b2a2b982ce897eb6f62ea2dddfd2d8d", @"/Areas/Access/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"f54748a23f63ac304f8208e4dd43723c018ffc943676b4c46f19d02b5966da04", @"/Areas/Access/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Areas_Access_Views_Shared_AdminPartial : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     #nullable disable
@@ -91,7 +97,7 @@ using MVC3.Areas.Identity.Models
             <ul class=""dropdown-menu"">
                 <li>
                     ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d932b2889ecdc8c3adc274fd39a570bd44e5b8e8cc98ce68deb6e26e5f7321745839", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d932b2889ecdc8c3adc274fd39a570bd44e5b8e8cc98ce68deb6e26e5f7321745991", async() => {
                 WriteLiteral("\r\n                        Roles\r\n                    ");
             }
             );
@@ -112,7 +118,7 @@ using MVC3.Areas.Identity.Models
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                </li>\r\n                <li>\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d932b2889ecdc8c3adc274fd39a570bd44e5b8e8cc98ce68deb6e26e5f7321747627", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d932b2889ecdc8c3adc274fd39a570bd44e5b8e8cc98ce68deb6e26e5f7321747779", async() => {
                 WriteLiteral("\r\n                        Users\r\n                    ");
             }
             );

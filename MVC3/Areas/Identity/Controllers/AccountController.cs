@@ -109,7 +109,7 @@ namespace MVC3.Areas.Identity.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
             return View();
         }

@@ -23,6 +23,7 @@ namespace MVC3.Areas.Access.Models
         [StringLength(10, ErrorMessage = "Department code can't be longer than 10 characters")]
         public string DepartmentCode { get; set; }
 
+
         public virtual ICollection<Title> Titles { get; set; }
     }
 }

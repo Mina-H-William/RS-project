@@ -23,7 +23,7 @@ else
                 <p><strong>Title:</strong> @activevacancy.TitleName</p>
             <p>
                 <strong>Locations:</strong>
-                    @foreach (var location in activevacancy.locations)
+                    @foreach (var location in activevacancy.locations.Distinct())
                 {
                     @location.LocationName
 

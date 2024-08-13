@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MVC3.Areas.Access.Models
 {
@@ -8,5 +9,7 @@ namespace MVC3.Areas.Access.Models
 
         [Required(ErrorMessage = "Nationality name is required")]
         public string Name { get; set; }
+
+
     }
 }

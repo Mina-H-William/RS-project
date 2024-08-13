@@ -59,7 +59,10 @@ namespace MVC3.Areas.Access.Controllers
         public IActionResult Create()
         {
             ViewData["TitleId"] = new SelectList(_context.Title, "TitleId", "TitleName");
-            ViewData["Projects"] = new SelectList(_context.Project, "ProjectId", "ProjectName");
+
+            // Filter projects to show only active ones
+            ViewData["Projects"] = new SelectList(_context.Project.Where(p => p.Active), "ProjectId", "ProjectName");
+
             return View();
         }
 
@@ -76,6 +79,8 @@ namespace MVC3.Areas.Access.Controllers
                     v => v.VacancyName.ToLower().Equals(vacancy.VacancyName.ToLower())))
                 {
                     ModelState.AddModelError("", "there another vacancy with the same name");
+                    ViewData["TitleId"] = new SelectList(_context.Title, "TitleId", "TitleName");
+                    ViewData["Projects"] = new SelectList(_context.Project.Where(p => p.Active), "ProjectId", "ProjectName");
                     return View(vacancy);
                 }
                 if (vacancy.SelectedProjectIds != null)
@@ -86,12 +91,14 @@ namespace MVC3.Areas.Access.Controllers
                         vacancy.VacancyProjects.Add(new VacancyProject { ProjectId = projectId });
                     }
                 }
+                vacancy.AddedBy = User.Identity.Name;
+
                 await _context.AddAsync(vacancy);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TitleId"] = new SelectList(_context.Title, "TitleId", "TitleName", vacancy.TitleId);
-            ViewData["ProjectId"] = new SelectList(_context.Project, "ProjectId", "ProjectName", vacancy.SelectedProjectIds);
+            ViewData["TitleId"] = new SelectList(_context.Title, "TitleId", "TitleName");
+            ViewData["Projects"] = new SelectList(_context.Project.Where(p => p.Active), "ProjectId", "ProjectName");
             return View(vacancy);
         }
 
@@ -136,7 +143,7 @@ namespace MVC3.Areas.Access.Controllers
             vacancy.SelectedProjectIds = vacancy.VacancyProjects.Select(vp => vp.ProjectId).ToArray();
 
             ViewData["TitleId"] = new SelectList(_context.Title, "TitleId", "TitleName", vacancy.TitleId);
-            ViewData["ProjectId"] = new MultiSelectList(_context.Project, "ProjectId", "ProjectName", vacancy.SelectedProjectIds);
+            ViewData["ProjectId"] = new MultiSelectList(_context.Project.Where(p => p.Active), "ProjectId", "ProjectName");
 
             return View(vacancy);
         }
@@ -194,7 +201,7 @@ namespace MVC3.Areas.Access.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("VacancyId,VacancyName,TotalVacancyCount,TitleId,Active,SelectedProjectIds")] Vacancy vacancy)
+        public async Task<IActionResult> Edit(int id, [Bind("VacancyId,VacancyName,TotalVacancyCount,TitleId,Active,SelectedProjectIds,AddedBy,AddedTime")] Vacancy vacancy)
         {
             if (id != vacancy.VacancyId)
             {
@@ -237,7 +244,7 @@ namespace MVC3.Areas.Access.Controllers
             }
 
             ViewData["TitleId"] = new SelectList(_context.Title, "TitleId", "TitleId", vacancy.TitleId);
-            ViewData["ProjectId"] = new MultiSelectList(_context.Project, "ProjectId", "ProjectName", vacancy.SelectedProjectIds);
+            ViewData["ProjectId"] = new MultiSelectList(_context.Project.Where(p => p.Active), "ProjectId", "ProjectName");
 
             return View(vacancy);
         }

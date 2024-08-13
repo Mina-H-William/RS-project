@@ -20,16 +20,20 @@ namespace MVC3.Areas.Access.Models
         public int TitleId { get; set; }
         public bool Active { get; set; }
 
+        public string AddedBy { get; set; }
+
+        public DateTime AddedTime { get; set; } = DateTime.Now;
+
         public virtual Title Title { get; set; }
         public virtual ICollection<Project> Projects { get; set; }
 
         public List<VacancyProject> VacancyProjects { get; set; }
 
         [NotMapped]
+        [Required(ErrorMessage = "Please select at least one project.")]
         public int[] SelectedProjectIds { get; set; } // Property to hold the selected Project ID
 
         public DateTime? LastUpdated { get; set; }
 
-        public String AddedBy {  get; set; }
     }
 }

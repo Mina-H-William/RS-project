@@ -39,7 +39,7 @@
             Locations:
         </dt>
         <dd class="col-sm-10">
-            @foreach (var location in Model.locations)
+            @foreach (var location in Model.locations.Distinct())
             {
                 <p>@location.LocationName</p>
             }

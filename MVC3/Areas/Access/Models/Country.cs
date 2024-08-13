@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using MVC3.Areas.Identity.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,6 +25,7 @@ namespace MVC3.Areas.Access.Models
         [StringLength(2, MinimumLength = 2, ErrorMessage = "Country code must be exactly 2 characters")]
         [RegularExpression("^[A-Z]{2}$", ErrorMessage = "Country code must be 2 uppercase letters")]
         public string CountryCode { get; set; }
+
 
         public virtual ICollection<Location> Locations { get; set; }
     }

@@ -73,7 +73,6 @@ namespace MVC3
             services.AddDistributedMemoryCache(); // Required for session to work
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
                 options.Cookie.HttpOnly = true; // Make the session cookie accessible only to the server
                 options.Cookie.IsEssential = true; // Make the session cookie essential
             });

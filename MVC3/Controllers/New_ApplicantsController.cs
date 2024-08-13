@@ -11,17 +11,21 @@ using MVC3.Data;
 using MVC3.Areas.Access.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.Extensions.Hosting.Internal;
+using Microsoft.AspNetCore.Hosting;
 
 namespace MVC3.Controllers
 {
     public class New_ApplicantsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly string _resumeFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "resumes");
 
-        public New_ApplicantsController(ApplicationDbContext context)
+        public New_ApplicantsController(ApplicationDbContext context,IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: New_Applicants
@@ -57,6 +61,12 @@ namespace MVC3.Controllers
             if (!string.IsNullOrEmpty(jsonModel))
             {
                 var applicant = JsonConvert.DeserializeObject<Applicant>(jsonModel);
+                string absolutePath = Path.Combine(_webHostEnvironment.WebRootPath, applicant.ResumeFilePath.TrimStart('/'));
+                if (System.IO.File.Exists(absolutePath))
+                {
+                    // Delete the file
+                    System.IO.File.Delete(absolutePath);
+                }
                 return View(applicant);
             }
             return View();

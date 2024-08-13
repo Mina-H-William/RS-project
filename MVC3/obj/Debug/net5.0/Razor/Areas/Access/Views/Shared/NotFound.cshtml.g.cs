@@ -34,12 +34,18 @@ using Microsoft.AspNetCore.Identity
 #line 4 "D:\RS-project\MVC3\Areas\Access\Views\_ViewImports.cshtml"
 using MVC3.Areas.Identity.Models
 
+#nullable disable
+    ;
+#nullable restore
+#line 5 "D:\RS-project\MVC3\Areas\Access\Views\_ViewImports.cshtml"
+using MVC3.Areas.Access.ViewModels
+
 #line default
 #line hidden
 #nullable disable
     ;
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"e8373d80bc35fbf9599c16c0def1129a515f4718384a8dddf38fd428e63318d2", @"/Areas/Access/Views/Shared/NotFound.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"04dd7fb1b53428699f5dd17a60fd612f6b2a2b982ce897eb6f62ea2dddfd2d8d", @"/Areas/Access/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"f54748a23f63ac304f8208e4dd43723c018ffc943676b4c46f19d02b5966da04", @"/Areas/Access/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Areas_Access_Views_Shared_NotFound : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     #nullable disable
@@ -90,7 +96,7 @@ using MVC3.Areas.Identity.Models
 #nullable disable
             );
             WriteLiteral("</h1>\r\n\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e8373d80bc35fbf9599c16c0def1129a515f4718384a8dddf38fd428e63318d24612", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e8373d80bc35fbf9599c16c0def1129a515f4718384a8dddf38fd428e63318d24764", async() => {
                 WriteLiteral("\r\n    Click here to navigate to the home page\r\n");
             }
             );

@@ -284,6 +284,9 @@ namespace MVC3.Migrations
                     b.Property<string>("AddedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("AddedTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("LastUpdated")
                         .HasColumnType("datetime2");
 
@@ -352,6 +355,33 @@ namespace MVC3.Migrations
                     b.HasIndex("ProjectId");
 
                     b.ToTable("VacancyProject");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Access.Models.question", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Answer_Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Header")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Question_type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("questions");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Identity.Models.ApplicationUser", b =>
@@ -427,13 +457,13 @@ namespace MVC3.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Active = true,
-                            ConcurrencyStamp = "69844cf1-3b6e-443f-92ce-6d07a8e58db2",
+                            ConcurrencyStamp = "93c82806-2159-4e81-823c-3de719f0ec67",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECzkGOa+quMOP01PQ2Adx2doMbTilX5t6+vKN3MzBWcnZACdDmrOEBBHx9bIYUHQBQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEICYLhvWTRrloM/gDr74thQ7RJtpOADKplFg63MMxUCKacOAWCmjdlcbnIX6GOCUzw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -709,7 +739,7 @@ namespace MVC3.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "9c8556df-9165-4271-b1bc-ba9e3c408e16",
+                            ConcurrencyStamp = "5e7a3005-4ec9-470e-a985-34ecaa3ffd12",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });

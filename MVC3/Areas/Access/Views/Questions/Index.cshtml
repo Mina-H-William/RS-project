@@ -1,0 +1,48 @@
+﻿
+
+<div style="display: flex; justify-content: center; margin: 20px; border-radius:20px; padding:10px;">
+    <select id="typeDropdown">
+        <option value="" disabled selected>Select Department</option>
+        <option value="HR">HR</option>
+        <option value="Technical">Technical</option>
+    </select>
+</div>
+
+
+<div id="questionsDiv">
+    <!-- The partial view content will be loaded here -->
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Function to load partial view based on the selected value
+            function loadPartialView(selectedValue) {
+                $.ajax({
+                    url: '@Url.Action("Questions_part", "Questions")',
+                    type: 'GET',
+                    data: { type: selectedValue }, // Pass the selected value to the action method
+                    success: function (result) {
+                        $('#questionsDiv').html(result); // Load the result into the div
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error loading partial view:", error);
+                    }
+                });
+            }
+
+            // Trigger the AJAX call when the dropdown value changes
+            $('#typeDropdown').change(function () {
+                var selectedValue = $(this).val(); // Get the selected value from the dropdown
+                loadPartialView(selectedValue); // Load the partial view for the selected value
+            });
+
+            // Trigger the AJAX call for the currently selected value on page load
+            var initialValue = $('#typeDropdown').val();
+            if (initialValue) {
+                loadPartialView(initialValue);
+            }
+        });
+    </script>
+}
