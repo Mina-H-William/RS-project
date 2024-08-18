@@ -25,5 +25,7 @@ namespace MVC3.Areas.Access.Models
 
 
         public virtual ICollection<Title> Titles { get; set; }
+
+        public ICollection<DepartmentUser> DepartmentUsers { get; set; }
     }
 }

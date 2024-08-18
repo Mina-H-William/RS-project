@@ -1,4 +1,4 @@
-﻿@model List<ViewModelQuestion>
+﻿@model List<QuestionViewModel>
 
 
 <div>
@@ -7,7 +7,55 @@
 
 @if (Model.Any())
 {
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Header</th>
+                <th>Answer Type</th>
+                <th>Choose Items</th>
+                <th>Active</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var question in Model)
+            {
+                <tr class=@(question.Active ?"" : "table-secondary")>
+                    <td>@question.Header</td>
+                    <td>@question.Answer_Type</td>
+                    <td>
+                        @if (question.ChooseItems != "")
+                        {
+                            var ChooseItemslist = question.ChooseItems.Split(',');
+                            <div>
+                                @ChooseItemslist[0]
+                                @for (int i = 1; i < ChooseItemslist.Length; i++)
+                                {
+                                    <span>, @ChooseItemslist[i]</span>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div>No Choose Items</div>
+                        }
+                    </td>
+                    <td>
+                        <form method="post" asp-action="UpdateActive" asp-controller="Questions" asp-area="access">
+                            <input type="hidden" name="id" value="@question.id" />
 
+                            <div class="form-check d-flex justify-content-between align-items-center" style="width:100%;">
+                                <div class="mt-2">
+                                    <input type="checkbox" class="form-check-input" name="active" value="true" @(question.Active ? "checked" : "") />
+                                    <label class="" for="activeCheckbox">Active</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {

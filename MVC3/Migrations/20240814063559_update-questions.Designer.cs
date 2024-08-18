@@ -4,14 +4,16 @@ using MVC3.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MVC3.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240814063559_update-questions")]
+    partial class updatequestions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,21 +161,6 @@ namespace MVC3.Migrations
                     b.HasKey("DepartmentId");
 
                     b.ToTable("Department");
-                });
-
-            modelBuilder.Entity("MVC3.Areas.Access.Models.DepartmentUser", b =>
-                {
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsetId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("DepartmentId", "UsetId");
-
-                    b.HasIndex("UsetId");
-
-                    b.ToTable("DepartmentUsers");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Access.Models.Location", b =>
@@ -472,13 +459,13 @@ namespace MVC3.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Active = true,
-                            ConcurrencyStamp = "e3d3f469-a5c3-46a1-8cf5-444ae0395e73",
+                            ConcurrencyStamp = "147b7a8f-33d8-42d3-bd40-47668c80405a",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM1uh0ZWoXR9LadmZufosv6rFbaEsyvbjNMb0L7Fib6PR/EflPliiSTebP5E6ZYmzQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMG3hVP9j+cuO0w0Ddk9PNwO2gmOylLuzKXbnZwtlAHoEnlYjs5uuQ+U/r/ON6vKrA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -754,29 +741,10 @@ namespace MVC3.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "2db59bd6-5aca-4548-a37a-81866c8aafb0",
+                            ConcurrencyStamp = "1daac74d-5f76-4358-ad54-930c964ac4e6",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
-                });
-
-            modelBuilder.Entity("MVC3.Areas.Access.Models.DepartmentUser", b =>
-                {
-                    b.HasOne("MVC3.Areas.Access.Models.Department", "Department")
-                        .WithMany("DepartmentUsers")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MVC3.Areas.Identity.Models.ApplicationUser", "User")
-                        .WithMany("DepartmentUsers")
-                        .HasForeignKey("UsetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Access.Models.Location", b =>
@@ -951,8 +919,6 @@ namespace MVC3.Migrations
 
             modelBuilder.Entity("MVC3.Areas.Access.Models.Department", b =>
                 {
-                    b.Navigation("DepartmentUsers");
-
                     b.Navigation("Titles");
                 });
 
@@ -974,11 +940,6 @@ namespace MVC3.Migrations
             modelBuilder.Entity("MVC3.Areas.Access.Models.Vacancy", b =>
                 {
                     b.Navigation("VacancyProjects");
-                });
-
-            modelBuilder.Entity("MVC3.Areas.Identity.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("DepartmentUsers");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Identity.Models.Permission", b =>

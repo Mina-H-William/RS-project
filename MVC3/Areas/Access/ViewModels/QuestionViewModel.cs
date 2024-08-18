@@ -2,7 +2,7 @@
 
 namespace MVC3.Areas.Access.ViewModels
 {
-    public class ViewModelQuestion
+    public class QuestionViewModel
     {
         public int id { get; set; }
 
@@ -12,5 +12,7 @@ namespace MVC3.Areas.Access.ViewModels
         public string Answer_Type { get; set; }
 
         public bool Active { get; set; }
+
+        public string ChooseItems { get; set; } = "";
     }
 }

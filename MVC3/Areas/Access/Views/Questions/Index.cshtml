@@ -1,10 +1,20 @@
 ﻿
 
+@{
+    var type = ViewData["type"] as string;
+    var nontype = type == "" ? "selected" : "";
+    var HRtype = type == "HR" ? "selected" : "";
+    var Tectype = type == "Technical" ? "selected" : "";
+    var none = $"<option value=\"\" disabled {nontype}>Select Department</option>";
+    var HR = $"<option value=\"HR\" {HRtype}>HR</option>";
+    var Technical = $"<option value=\"Technical\" {Tectype}>Technical</option>";
+}
+
 <div style="display: flex; justify-content: center; margin: 20px; border-radius:20px; padding:10px;">
     <select id="typeDropdown">
-        <option value="" disabled selected>Select Department</option>
-        <option value="HR">HR</option>
-        <option value="Technical">Technical</option>
+        @Html.Raw(none)
+        @Html.Raw(HR)
+        @Html.Raw(Technical)
     </select>
 </div>
 

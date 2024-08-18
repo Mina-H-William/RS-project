@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,6 +24,12 @@ namespace MVC3.Areas.Identity.ViewModels
         [Compare("Password",
             ErrorMessage = "Password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        // For multi-select dropdown
+        public List<int> SelectedDepartmentIds { get; set; } = new List<int>();
+
+        // To populate the multi-select dropdown
+        public IEnumerable<SelectListItem> Departments { get; set; }
 
     }
 }

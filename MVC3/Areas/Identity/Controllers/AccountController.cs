@@ -1,10 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using MVC3.Areas.Access.Models;
 using MVC3.Areas.Identity.Authorization;
 using MVC3.Areas.Identity.Models;
 using MVC3.Areas.Identity.ViewModels;
+using MVC3.Data;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MVC3.Areas.Identity.Controllers
@@ -14,12 +19,14 @@ namespace MVC3.Areas.Identity.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ApplicationDbContext _dbcontext;
 
         public AccountController(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager, ApplicationDbContext dbcontext)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            _dbcontext = dbcontext;
         }
         public IActionResult Index()
         {
@@ -40,11 +47,6 @@ namespace MVC3.Areas.Identity.Controllers
             return RedirectToAction("index", "Home", new { area = "Identity" });
         }
 
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
 
         [AcceptVerbs("Get", "Post")]
         public async Task<IActionResult> IsEmailInUse(string email)
@@ -80,6 +82,25 @@ namespace MVC3.Areas.Identity.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Register()
+        {
+            var departments = await _dbcontext.Department
+                .Select(d => new SelectListItem
+                {
+                    Value = d.DepartmentId.ToString(),
+                    Text = d.DepartmentName
+                })
+                .ToListAsync();
+
+            var model = new RegisterViewModel
+            {
+                Departments = departments
+            };
+
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -95,6 +116,17 @@ namespace MVC3.Areas.Identity.Controllers
 
                 if (result.Succeeded)
                 {
+                    foreach (var departmentId in model.SelectedDepartmentIds)
+                    {
+                        var departmentUser = new DepartmentUser
+                        {
+                            DepartmentId = departmentId,
+                            UsetId = user.Id
+                        };
+                        await _dbcontext.DepartmentUsers.AddAsync(departmentUser);
+                    }
+
+                    await _dbcontext.SaveChangesAsync();
 
                     return RedirectToAction("index", "Home", new { area = "identity" });
                 }

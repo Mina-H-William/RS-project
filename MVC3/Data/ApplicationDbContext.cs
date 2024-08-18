@@ -19,6 +19,7 @@ namespace MVC3.Data
         {
         }
 
+        public DbSet<DepartmentUser> DepartmentUsers { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<question> questions { get; set; }
@@ -128,8 +129,10 @@ namespace MVC3.Data
                 .WithMany(p => p.RolePermissions)
                 .HasForeignKey(rp => rp.PermissionId);
 
-            // initial permissions data
-            modelBuilder.Entity<Permission>().HasData(
+            /////////////////////////////
+
+            var permissions = new List<Permission>()
+            {
                 new Permission { Id = 1, Name = "Admin" },
                 new Permission { Id = 2, Name = "Applicant" },
                 new Permission { Id = 3, Name = "Country" },
@@ -137,8 +140,12 @@ namespace MVC3.Data
                 new Permission { Id = 5, Name = "Title" },
                 new Permission { Id = 6, Name = "Project" },
                 new Permission { Id = 7, Name = "Department" },
-                new Permission { Id = 8, Name = "Location" }
-            );
+                new Permission { Id = 8, Name = "Location" },
+                new Permission { Id = 9, Name = "Questions" }
+            };
+
+            // initial permissions data
+            modelBuilder.Entity<Permission>().HasData(permissions);
             ////////////////
             ////////////////////create role admin and user and assign all permissions to this role /////////////
 
@@ -176,17 +183,32 @@ namespace MVC3.Data
             });
 
             // Assign All Permissions to Admin Role
-            var permissions = new List<RolePermission>();
-            for (int i = 1; i <= 8; i++)
+            var rolepermissions = new List<RolePermission>();
+            foreach (var permission in permissions)
             {
-                permissions.Add(new RolePermission
+                var rolepermission = new RolePermission()
                 {
-                    RoleId = adminRoleId,
-                    PermissionId = i
-                });
+                    PermissionId = permission.Id,
+                    RoleId = adminRoleId
+                };
+                rolepermissions.Add(rolepermission);
             }
-            modelBuilder.Entity<RolePermission>().HasData(permissions.ToArray());
+            modelBuilder.Entity<RolePermission>().HasData(rolepermissions.ToArray());
 
+            ////////////////////////////////////
+
+            modelBuilder.Entity<DepartmentUser>()
+            .HasKey(du => new { du.DepartmentId, du.UsetId });
+
+            modelBuilder.Entity<DepartmentUser>()
+                .HasOne(du => du.Department)
+                .WithMany(d => d.DepartmentUsers)
+                .HasForeignKey(du => du.DepartmentId);
+
+            modelBuilder.Entity<DepartmentUser>()
+                .HasOne(du => du.User)
+                .WithMany(u => u.DepartmentUsers)
+                .HasForeignKey(du => du.UsetId);
 
             //////////////////
 

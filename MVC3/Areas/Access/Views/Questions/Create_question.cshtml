@@ -1,7 +1,5 @@
 ﻿@model QuestioninputViewModel
 
-
-
 <h4>question</h4>
 <hr />
 <div class="row">
@@ -10,7 +8,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Question_type" class="control-label"></label>
-                <input asp-for="Question_type" class="form-control" disabled/>
+                <input asp-for="Question_type" type="hidden" />
+                <input asp-for="Question_type" class="form-control" disabled />
+                <span asp-validation-for="Question_type" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Header" class="control-label"></label>
@@ -22,6 +22,19 @@
                 <select asp-for="Answer_Type" asp-items="Model.AnswerTypeOptions" class="form-control"></select>
                 <span asp-validation-for="Answer_Type" class="text-danger"></span>
             </div>
+
+            <!-- New fields -->
+            <div class="form-group" id="additional-fields-group" style="display:none;position:relative;">
+                <label>Write Items</label>
+                <div class="d-flex flex-row mb-4">
+                <input id="newField" class="form-control mt-2"/>
+                    <button type="button" id="addField" class="btn btn-secondary mt-2" style="position:absolute; left: 105%;">+</button>
+                </div>
+                <label>Choose Item</label>
+                <input id="additionalFields" name="chooseitems" type="hidden" />
+                <input id="disabledField" class="form-control" disabled />
+            </div>
+
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
@@ -38,3 +51,66 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Show additional fields if the Answer_Type equals "Choose"
+            $('#Answer_Type').change(function () {
+                if ($(this).val() === 'Choose') {  // Replace 'Choose' with the appropriate value
+                    $('#additional-fields-group').show();
+                } else {
+                    $('#additional-fields-group').hide();
+                    $('#disabledField').val('');
+                    $('#additionalFields').val('');
+                }
+            });
+
+            // Function to add a new field to the disabled field and hidden field list
+            function addField() {
+                var newFieldValue = $('#newField').val().trim();
+                if (newFieldValue) {
+                    var currentDisabledValue = $('#disabledField').val();
+                    var updatedDisabledValue = currentDisabledValue ? currentDisabledValue + ', ' + newFieldValue : newFieldValue;
+                    $('#disabledField').val(updatedDisabledValue);
+
+                    var currentAdditionalFields = $('#additionalFields').val();
+                    var updatedAdditionalFields = currentAdditionalFields ? currentAdditionalFields + ',' + newFieldValue : newFieldValue;
+                    $('#additionalFields').val(updatedAdditionalFields);
+
+                    $('#newField').val(''); // Clear the input
+                }
+            }
+
+            // Add new field when the + button is clicked
+            $('#addField').click(function () {
+                addField();
+            });
+
+            // Add new field when Enter key is pressed in the newField input
+            $('#newField').keydown(function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); // Prevent form submission
+                    addField();
+                }
+            });
+        });
+    </script>
+}
+
+<style>
+    #addField {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        outline: none;
+        padding: 0;
+        color: #007bff; /* Default Bootstrap link color */
+        font-size: 1.5rem; /* Adjust size as needed */
+        cursor: pointer;
+    }
+
+    #newField {
+        box-shadow: none;
+        outline: none;
+    }
+</style>
