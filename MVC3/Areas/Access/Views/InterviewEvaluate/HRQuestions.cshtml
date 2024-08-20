@@ -1,0 +1,78 @@
+﻿@model allQuestionEvaluateViewModel
+
+@{
+    bool submit = ViewBag.submit;
+}
+
+<form asp-action="SubmitHRQuestions" method="post">
+    <input asp-for="VacancyId" type="hidden" />
+    <input asp-for="ApplicantId" type="hidden" />
+    @for (int i = 0; i < Model.Questions.Count; i++)
+    {
+        <input asp-for="Questions[i].QuestionId" type="hidden" />
+        <input asp-for="Questions[i].Header" type="hidden" />
+        <input asp-for="Questions[i].AnswerType" type="hidden" />
+        @for (int j = 0; j < (Model.Questions[i].ChooseItems?.Length ?? 0); j++)
+        {
+            <input asp-for="Questions[i].ChooseItems[j]" type="hidden" />
+        }
+        <div class="form-group mb-4">
+            <div class="d-flex align-items-center">
+                <label class="me-3">@Model.Questions[i].Header</label>
+            </div>
+
+            <!-- Answer Input -->
+            @if (Model.Questions[i].AnswerType == "Text")
+            {
+                <textarea asp-for="Questions[i].Answer" class="form-control mt-2" rows="1" style="resize: vertical;"></textarea>
+            }
+            else if (Model.Questions[i].AnswerType == "Choose")
+            {
+                <select asp-for="Questions[i].Answer" class="form-control mt-2">
+                    @foreach (var item in Model.Questions[i].ChooseItems)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            }
+            else if (Model.Questions[i].AnswerType == "Checkbox")
+            {
+                <div class="mt-2">
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" asp-for="Questions[i].Answer">
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    @if (!submit)
+    {
+        <div class="d-flex align-items-center justify-content-between">
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="d-flex align-items-center">
+                <select asp-for="final_ration" class="form-select w-auto me-3" style="margin-bottom: 9px;">
+                    @for (int i = 10; i > 0; i--)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                <label class="m-2">Final Rating of Form</label>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="d-flex align-items-center justify-content-between">
+            <div>
+                <button type="submit" asp-action="Approve_HR" class="btn btn-primary">Approve</button>
+                <button type="submit" asp-action="DisApprove_HR" class="btn btn-danger">DisApprove</button>
+            </div>
+            <div>
+                <h3>Final Rating: @Model.final_ration / 10</h3>
+            </div>
+        </div>
+    }
+</form>

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using MVC3.Data;
 using MVC3.Areas.Access.Models;
 using MVC3.Areas.Identity.Authorization;
+using MVC3.Areas.Access.ViewModels;
 
 namespace MVC3.Areas.Access.Controllers
 {
@@ -318,13 +319,16 @@ namespace MVC3.Areas.Access.Controllers
 
             foreach (var sub in submissions)
             {
+                var applicantstatus = _context.ApplicantStatus.Find(sub.ApplicantId, Id);
                 var subview = new SubmissionViewModel()
                 {
                     ApplicantFirstName = sub.ApplicantFirstName,
                     ApplicantLastName = sub.ApplicantLastName,
                     ApplicantId = sub.ApplicantId,
                     YearsOfExperience = sub.YearsOfExperience,
-                    ResumeFilePath = sub.ResumeFilePath
+                    ResumeFilePath = sub.ResumeFilePath,
+                    HR_Status = (applicantstatus.HR) ? "Done" : "Waiting",
+                    Technical_Status = (applicantstatus.Technical) ? "Done" : "Waiting"
                 };
                 submissionsview.Add(subview);
             }

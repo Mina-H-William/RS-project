@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using MVC3.Areas.Access.Models;
 using MVC3.Areas.Identity.Authorization;
 using MVC3.Areas.Identity.Models;
 using MVC3.Areas.Identity.ViewModels;
@@ -117,10 +119,137 @@ namespace MVC3.Areas.Identity.Controllers
         }
 
         [HttpGet]
-        public IActionResult ListUsers()
+        public async Task<IActionResult> ListUsers()
         {
-            var users = userManager.Users;
+            var users = await userManager.Users
+            .Include(u => u.UserDepartmentProject)
+                .ThenInclude(udp => udp.Project)
+            .Include(u => u.UserDepartmentProject)
+                .ThenInclude(udp => udp.Department)
+            .ToListAsync();
             return View(users);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            if (TempData["error"] != null)
+            {
+                ModelState.AddModelError("", TempData["error"] as string);
+            }
+
+            var user = await userManager.Users
+            .Include(u => u.UserDepartmentProject)
+                .ThenInclude(udp => udp.Project)
+            .Include(u => u.UserDepartmentProject)
+                .ThenInclude(udp => udp.Department)
+            .FirstOrDefaultAsync(u => u.Id == id);
+
+            var roles = await userManager.GetRolesAsync(user);
+
+            var departments = await _dbcontext.Department
+                .Select(d => new SelectListItem
+                {
+                    Value = d.DepartmentId.ToString(),
+                    Text = d.DepartmentName
+                })
+                .ToListAsync();
+
+            var Projects = await _dbcontext.Project
+                .Select(d => new SelectListItem
+                {
+                    Value = d.ProjectId.ToString(),
+                    Text = d.ProjectName
+                })
+                .ToListAsync();
+
+            var model = new EditUserViewModel()
+            {
+                user = user,
+                Roles = roles,
+                SelectedDepartmentId = user.UserDepartmentProject?.FirstOrDefault()?.DepartmentId ?? 0,
+                SelectedProjectIds = user.UserDepartmentProject?.Select(d => d.ProjectId)?.ToList() ?? new List<int>(),
+                Departments = departments,
+                Projects = Projects
+            };
+            return View(model);
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        public async Task<IActionResult> updateudp(EditUserViewModel model, string id)
+        {
+            if (!model.SelectedProjectIds.Any())
+            {
+                TempData["error"] = "you must select at least one project";
+                return RedirectToAction("EditUser", new { id = id });
+            }
+
+            var upd = await userManager.Users
+            .Include(u => u.UserDepartmentProject)
+            .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (upd == null)
+            {
+                return NotFound();
+            }
+
+            //get all records of this user in udp
+            var existingRecords = upd.UserDepartmentProject.ToList();
+
+            // Remove existing UserDepartmentProject entries for the user
+            #region bad
+            /*_dbcontext.UserDepartmentProject.RemoveRange(existingRecords);
+
+            //add new rows
+            foreach (var projectId in model.SelectedProjectIds)
+            {
+                upd.UserDepartmentProject.Add(new UserDepartmentProject
+                {
+                    UsetId = id,
+                    DepartmentId = model.SelectedDepartmentId.Value,
+                    ProjectId = projectId
+                });
+            }*/
+            #endregion
+
+            // update department id in all records
+            foreach (var entry in existingRecords)
+            {
+                entry.DepartmentId = model.SelectedDepartmentId.Value;
+            }
+
+            // get records with projects to delete
+            var projectsToRemove = existingRecords
+            .Where(udp => !model.SelectedProjectIds.Contains(udp.ProjectId))
+            .ToList();
+
+            _dbcontext.UserDepartmentProject.RemoveRange(projectsToRemove);
+
+            // get all projects id in this records
+            var existingProjectIds = existingRecords.Select(udp => udp.ProjectId).ToList();
+
+            //get all project that not found in this records
+            var newProjects = model.SelectedProjectIds
+                .Where(pid => !existingProjectIds.Contains(pid))
+                .ToList();
+
+            // add new record to table with new projects
+            foreach (var projectId in newProjects)
+            {
+                var newEntry = new UserDepartmentProject
+                {
+                    UserId = id,
+                    DepartmentId = model.SelectedDepartmentId.Value,
+                    ProjectId = projectId
+                };
+                _dbcontext.UserDepartmentProject.Add(newEntry);
+            }
+
+            //save changes
+            await _dbcontext.SaveChangesAsync();
+
+
+            return RedirectToAction("EditUser", new { id = id });
         }
 
         [HttpGet]
@@ -181,28 +310,21 @@ namespace MVC3.Areas.Identity.Controllers
             {
                 var role = await roleManager.FindByIdAsync(model[i].RoleId);
 
-                IdentityResult result = null;
 
                 if (model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))
                 {
-                    result = await userManager.AddToRoleAsync(user, role.Name);
+                    await userManager.AddToRoleAsync(user, role.Name);
                 }
                 else if (!model[i].IsSelected && await userManager.IsInRoleAsync(user, role.Name))
                 {
-                    result = await userManager.RemoveFromRoleAsync(user, role.Name);
-                }
-                else
-                {
-                    continue;
+                    await userManager.RemoveFromRoleAsync(user, role.Name);
                 }
 
-                if (result.Succeeded)
-                {
-                    if (i < (model.Count - 1))
-                        continue;
-                    else
-                        return RedirectToAction("ListUsers");
-                }
+                if (i < (model.Count - 1))
+                    continue;
+                else
+                    return RedirectToAction("EditUser", new { id = user.Id });
+
             }
             ModelState.AddModelError("", "cant update please try again");
 

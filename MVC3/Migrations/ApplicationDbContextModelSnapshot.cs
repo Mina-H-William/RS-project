@@ -117,6 +117,59 @@ namespace MVC3.Migrations
                     b.ToTable("Applicant");
                 });
 
+            modelBuilder.Entity("MVC3.Areas.Access.Models.ApplicantAnswers", b =>
+                {
+                    b.Property<int>("ApplicantId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VacancyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Answer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ApplicantId", "VacancyId", "QuestionId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("VacancyId");
+
+                    b.ToTable("ApplicantAnswers");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Access.Models.ApplicantStatus", b =>
+                {
+                    b.Property<int>("ApplicantId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VacancyId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("HR")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("HR_Rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Technical")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Technical_rating")
+                        .HasColumnType("int");
+
+                    b.HasKey("ApplicantId", "VacancyId");
+
+                    b.HasIndex("VacancyId");
+
+                    b.ToTable("ApplicantStatus");
+                });
+
             modelBuilder.Entity("MVC3.Areas.Access.Models.Country", b =>
                 {
                     b.Property<int>("CountryId")
@@ -159,21 +212,6 @@ namespace MVC3.Migrations
                     b.HasKey("DepartmentId");
 
                     b.ToTable("Department");
-                });
-
-            modelBuilder.Entity("MVC3.Areas.Access.Models.DepartmentUser", b =>
-                {
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsetId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("DepartmentId", "UsetId");
-
-                    b.HasIndex("UsetId");
-
-                    b.ToTable("DepartmentUsers");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Access.Models.Location", b =>
@@ -284,6 +322,33 @@ namespace MVC3.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("Title");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Access.Models.UserDepartmentProject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserDepartmentProject");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Access.Models.Vacancy", b =>
@@ -472,13 +537,13 @@ namespace MVC3.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Active = true,
-                            ConcurrencyStamp = "e3d3f469-a5c3-46a1-8cf5-444ae0395e73",
+                            ConcurrencyStamp = "67da9125-1aba-46ea-beef-a4ec987d2fd2",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM1uh0ZWoXR9LadmZufosv6rFbaEsyvbjNMb0L7Fib6PR/EflPliiSTebP5E6ZYmzQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFhvuSprD6rcc1iipZm15IBYvnRrRBrxfc3QVYv4WkD2emLoFaXAK5xWKEhjFIZGPA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -540,6 +605,11 @@ namespace MVC3.Migrations
                         {
                             Id = 8,
                             Name = "Location"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Questions"
                         });
                 });
 
@@ -597,6 +667,11 @@ namespace MVC3.Migrations
                         {
                             RoleId = "1",
                             PermissionId = 8
+                        },
+                        new
+                        {
+                            RoleId = "1",
+                            PermissionId = 9
                         });
                 });
 
@@ -754,29 +829,56 @@ namespace MVC3.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "2db59bd6-5aca-4548-a37a-81866c8aafb0",
+                            ConcurrencyStamp = "fc35304b-aeca-41df-a0b7-282a889a4de4",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
                 });
 
-            modelBuilder.Entity("MVC3.Areas.Access.Models.DepartmentUser", b =>
+            modelBuilder.Entity("MVC3.Areas.Access.Models.ApplicantAnswers", b =>
                 {
-                    b.HasOne("MVC3.Areas.Access.Models.Department", "Department")
-                        .WithMany("DepartmentUsers")
-                        .HasForeignKey("DepartmentId")
+                    b.HasOne("MVC3.Areas.Access.Models.Applicant", "Applicant")
+                        .WithMany("ApplicantAnswers")
+                        .HasForeignKey("ApplicantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MVC3.Areas.Identity.Models.ApplicationUser", "User")
-                        .WithMany("DepartmentUsers")
-                        .HasForeignKey("UsetId")
+                    b.HasOne("MVC3.Areas.Access.Models.question", "Question")
+                        .WithMany("ApplicantAnswers")
+                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Department");
+                    b.HasOne("MVC3.Areas.Access.Models.Vacancy", "Vacancy")
+                        .WithMany("ApplicantAnswers")
+                        .HasForeignKey("VacancyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Applicant");
+
+                    b.Navigation("Question");
+
+                    b.Navigation("Vacancy");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Access.Models.ApplicantStatus", b =>
+                {
+                    b.HasOne("MVC3.Areas.Access.Models.Applicant", "Applicant")
+                        .WithMany("ApplicantStatus")
+                        .HasForeignKey("ApplicantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVC3.Areas.Access.Models.Vacancy", "Vacancy")
+                        .WithMany("ApplicantStatus")
+                        .HasForeignKey("VacancyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Applicant");
+
+                    b.Navigation("Vacancy");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Access.Models.Location", b =>
@@ -810,6 +912,31 @@ namespace MVC3.Migrations
                         .IsRequired();
 
                     b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Access.Models.UserDepartmentProject", b =>
+                {
+                    b.HasOne("MVC3.Areas.Access.Models.Department", "Department")
+                        .WithMany("UserDepartmentProject")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVC3.Areas.Access.Models.Project", "Project")
+                        .WithMany("UserDepartmentProject")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVC3.Areas.Identity.Models.ApplicationUser", "User")
+                        .WithMany("UserDepartmentProject")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Access.Models.Vacancy", b =>
@@ -941,6 +1068,10 @@ namespace MVC3.Migrations
 
             modelBuilder.Entity("MVC3.Areas.Access.Models.Applicant", b =>
                 {
+                    b.Navigation("ApplicantAnswers");
+
+                    b.Navigation("ApplicantStatus");
+
                     b.Navigation("VacancyApplicants");
                 });
 
@@ -951,9 +1082,9 @@ namespace MVC3.Migrations
 
             modelBuilder.Entity("MVC3.Areas.Access.Models.Department", b =>
                 {
-                    b.Navigation("DepartmentUsers");
-
                     b.Navigation("Titles");
+
+                    b.Navigation("UserDepartmentProject");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Access.Models.Location", b =>
@@ -963,6 +1094,8 @@ namespace MVC3.Migrations
 
             modelBuilder.Entity("MVC3.Areas.Access.Models.Project", b =>
                 {
+                    b.Navigation("UserDepartmentProject");
+
                     b.Navigation("VacancyProjects");
                 });
 
@@ -973,12 +1106,21 @@ namespace MVC3.Migrations
 
             modelBuilder.Entity("MVC3.Areas.Access.Models.Vacancy", b =>
                 {
+                    b.Navigation("ApplicantAnswers");
+
+                    b.Navigation("ApplicantStatus");
+
                     b.Navigation("VacancyProjects");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Access.Models.question", b =>
+                {
+                    b.Navigation("ApplicantAnswers");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Identity.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("DepartmentUsers");
+                    b.Navigation("UserDepartmentProject");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Identity.Models.Permission", b =>

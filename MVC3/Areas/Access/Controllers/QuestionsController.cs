@@ -25,10 +25,14 @@ namespace MVC3.Areas.Access.Controllers
             _context = context;
         }
 
+        public IActionResult getType()
+        {
+            var type = HttpContext.Session.GetString("QuestionType") ?? "";
+            return Json(new { typedp = type });
+        }
+
         public IActionResult Index()
         {
-            var type = HttpContext.Session.GetString("QuestionType")?? "";
-            ViewData["type"] = type;
             return View();
         }
 
@@ -89,9 +93,25 @@ namespace MVC3.Areas.Access.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (model.Answer_Type == "Choose")
+                {
+                    chooseitems = (chooseitems == null) ? "" : chooseitems;
+                    string[] items = chooseitems.Split(',');
+                    if (items.Length < 2)
+                    {
+                        ModelState.AddModelError("", "You must write at least two items");
+                        model.AnswerTypeOptions = new List<SelectListItem>
+                        {
+                            new SelectListItem { Value = "Text", Text = "Text" },
+                            new SelectListItem { Value = "Checkbox", Text = "Checkbox" },
+                            new SelectListItem { Value = "Choose", Text = "Choose" }
+                        };
+                        return View(model);
+                    }
+                }
                 var question = new question()
                 {
-                    Question_type =model.Question_type,
+                    Question_type = model.Question_type,
                     Header = model.Header,
                     Answer_Type = model.Answer_Type,
                     Active = model.Active,

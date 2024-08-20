@@ -1628,3 +1628,5 @@ D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Access\Views\Shared\_ValidationS
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Access\Views\Questions\Index.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Access\Views\Questions\QuestionsPartial.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Access\Views\Questions\Create_question.cshtml.g.cs
+D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Identity\Views\Adminstration\EditUser.cshtml.g.cs
+D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Access\Views\InterviewEvaluate\HRQuestions.cshtml.g.cs

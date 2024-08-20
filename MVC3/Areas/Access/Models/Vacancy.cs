@@ -35,5 +35,10 @@ namespace MVC3.Areas.Access.Models
 
         public DateTime? LastUpdated { get; set; }
 
+        public virtual ICollection<ApplicantAnswers> ApplicantAnswers { get; set; }
+
+        public virtual ICollection<ApplicantStatus> ApplicantStatus { get; set; }
+
+
     }
 }

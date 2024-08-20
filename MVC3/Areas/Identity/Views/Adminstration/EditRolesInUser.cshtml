@@ -11,6 +11,7 @@
                 <h2>Add or remove roles to this user</h2>
             </div>
             <div class="card-body">
+                <div asp-validation-summary="All" class="text-danger"></div>
                 @for (int i = 0; i < Model.Count; i++)
                 {
                     @if (Model[i].RoleName != "Admin")
@@ -24,12 +25,19 @@
                             </label>
                         </div>
                     }
+                    else
+                    {
+                        <div class="form-check m-1" style="display:none;">
+                            <input type="hidden" asp-for="@Model[i].RoleId" />
+                            <input type="hidden" asp-for="@Model[i].RoleName" />
+                        </div>
+                    }
                 }
             </div>
             <div class="card-footer">
                 <input type="submit" value="Update" class="btn btn-primary"
                        style="width:auto" />
-                <a asp-action="ListUsers" asp-controller="Adminstration" asp-area="identity"
+                <a asp-action="EditUser" asp-controller="Adminstration" asp-area="identity" asp-route-id="@userId"
                    class="btn btn-primary" style="width:auto">Cancel</a>
             </div>
         </div>

@@ -9,6 +9,7 @@ using MVC3.Areas.Identity.Authorization;
 using MVC3.Areas.Identity.Models;
 using MVC3.Areas.Identity.ViewModels;
 using MVC3.Data;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -74,7 +75,7 @@ namespace MVC3.Areas.Identity.Controllers
             }
             else
             {
-                if(!user.Active)
+                if (!user.Active)
                 {
                     return Json($"This email is not active");
                 }
@@ -93,9 +94,19 @@ namespace MVC3.Areas.Identity.Controllers
                 })
                 .ToListAsync();
 
+            var Projects = await _dbcontext.Project
+                .Select(d => new SelectListItem
+                {
+                    Value = d.ProjectId.ToString(),
+                    Text = d.ProjectName
+                })
+                .ToListAsync();
+
+
             var model = new RegisterViewModel
             {
-                Departments = departments
+                Departments = departments,
+                Projects = Projects
             };
 
             return View(model);
@@ -106,6 +117,29 @@ namespace MVC3.Areas.Identity.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (!model.SelectedProjectIds.Any())
+                {
+                    ModelState.AddModelError("SelectedProjectIds", "you must select project");
+                    var departments = await _dbcontext.Department
+                    .Select(d => new SelectListItem
+                    {
+                        Value = d.DepartmentId.ToString(),
+                        Text = d.DepartmentName
+                    })
+                    .ToListAsync();
+
+                    var Projects = await _dbcontext.Project
+                        .Select(d => new SelectListItem
+                        {
+                            Value = d.ProjectId.ToString(),
+                            Text = d.ProjectName
+                        })
+                        .ToListAsync();
+                    model.Departments = departments;
+                    model.Projects = Projects;
+                    return View(model);
+                }
+
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -116,14 +150,15 @@ namespace MVC3.Areas.Identity.Controllers
 
                 if (result.Succeeded)
                 {
-                    foreach (var departmentId in model.SelectedDepartmentIds)
+                    foreach (var projectid in model.SelectedProjectIds)
                     {
-                        var departmentUser = new DepartmentUser
+                        var departmentUser = new UserDepartmentProject
                         {
-                            DepartmentId = departmentId,
-                            UsetId = user.Id
+                            DepartmentId = model.SelectedDepartmentId,
+                            ProjectId = projectid,
+                            UserId = user.Id
                         };
-                        await _dbcontext.DepartmentUsers.AddAsync(departmentUser);
+                        await _dbcontext.UserDepartmentProject.AddAsync(departmentUser);
                     }
 
                     await _dbcontext.SaveChangesAsync();

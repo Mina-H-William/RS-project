@@ -51,10 +51,13 @@
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
-    <script>
+@*     <script>
         $(document).ready(function () {
             $('.js-example-basic-multiple').select2();
         });
+    </script> *@
+    <script>
+        $('select').select2();
     </script>
 </body>
 </html>

@@ -19,7 +19,9 @@ namespace MVC3.Data
         {
         }
 
-        public DbSet<DepartmentUser> DepartmentUsers { get; set; }
+        public virtual DbSet<ApplicantAnswers> ApplicantAnswers { get; set; }
+        public virtual DbSet<ApplicantStatus> ApplicantStatus { get; set; }
+        public virtual DbSet<UserDepartmentProject> UserDepartmentProject { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<question> questions { get; set; }
@@ -195,22 +197,65 @@ namespace MVC3.Data
             }
             modelBuilder.Entity<RolePermission>().HasData(rolepermissions.ToArray());
 
-            ////////////////////////////////////
+            //////////////////// UPD-database ////////////////
 
-            modelBuilder.Entity<DepartmentUser>()
-            .HasKey(du => new { du.DepartmentId, du.UsetId });
+            modelBuilder.Entity<UserDepartmentProject>()
+            .HasKey(du => new { du.Id });
 
-            modelBuilder.Entity<DepartmentUser>()
+            modelBuilder.Entity<UserDepartmentProject>()
                 .HasOne(du => du.Department)
-                .WithMany(d => d.DepartmentUsers)
+                .WithMany(d => d.UserDepartmentProject)
                 .HasForeignKey(du => du.DepartmentId);
 
-            modelBuilder.Entity<DepartmentUser>()
+            modelBuilder.Entity<UserDepartmentProject>()
                 .HasOne(du => du.User)
-                .WithMany(u => u.DepartmentUsers)
-                .HasForeignKey(du => du.UsetId);
+                .WithMany(u => u.UserDepartmentProject)
+                .HasForeignKey(du => du.UserId);
+
+            modelBuilder.Entity<UserDepartmentProject>()
+                .HasOne(du => du.Project)
+                .WithMany(u => u.UserDepartmentProject)
+                .HasForeignKey(du => du.ProjectId);
 
             //////////////////
+
+            ///// hr-technical evalute database //////////////////
+            ///// Applicant Answer ///////////////
+
+            modelBuilder.Entity<ApplicantAnswers>()
+                .HasKey(du => new { du.ApplicantId,du.VacancyId,du.QuestionId });
+
+            modelBuilder.Entity<ApplicantAnswers>()
+                .HasOne(AA => AA.Applicant)
+                .WithMany(A => A.ApplicantAnswers)
+                .HasForeignKey(AA => AA.ApplicantId);
+
+            modelBuilder.Entity<ApplicantAnswers>()
+                .HasOne(AA => AA.Vacancy)
+                .WithMany(v => v.ApplicantAnswers)
+                .HasForeignKey(AA => AA.VacancyId);
+
+            modelBuilder.Entity<ApplicantAnswers>()
+                .HasOne(AA => AA.Question)
+                .WithMany(u => u.ApplicantAnswers)
+                .HasForeignKey(AA => AA.QuestionId);
+
+            ///////// Applicant Status ///////////////
+
+            modelBuilder.Entity<ApplicantStatus>()
+                .HasKey(du => new { du.ApplicantId, du.VacancyId });
+
+            modelBuilder.Entity<ApplicantStatus>()
+                .HasOne(AA => AA.Applicant)
+                .WithMany(A => A.ApplicantStatus)
+                .HasForeignKey(AA => AA.ApplicantId);
+
+            modelBuilder.Entity<ApplicantStatus>()
+                .HasOne(AA => AA.Vacancy)
+                .WithMany(v => v.ApplicantStatus)
+                .HasForeignKey(AA => AA.VacancyId);
+
+            //////////////////////
 
             OnModelCreatingPartial(modelBuilder);
         }

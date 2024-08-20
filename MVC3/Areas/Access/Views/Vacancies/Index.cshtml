@@ -69,7 +69,7 @@
                         <a asp-action="Edit" asp-route-id="@item.VacancyId" class="btn btn-warning btn-sm">Edit</a>
                         <a asp-action="Details" asp-route-id="@item.VacancyId" class="btn btn-info btn-sm">Details</a>
                         @* <a href="@Url.Action("View_Submissions", "VacancyApplicants", new { vacancyId = item.VacancyId })" class="btn btn-primary btn-sm">View Submissions</a> *@
-                        <a asp-area="Access" asp-controller="Vacancies" asp-action="viewsubmissions" asp-route-id="@item.VacancyId" class="btn btn-primary btn-sm">
+                        <a asp-area="Access" asp-controller="Vacancies" asp-action="viewsubmissions" asp-route-Id="@item.VacancyId" class="btn btn-primary btn-sm">
                             View Submissions
                         </a>
                     </td>

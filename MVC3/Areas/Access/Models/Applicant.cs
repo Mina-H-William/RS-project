@@ -91,5 +91,10 @@ namespace MVC3.Areas.Access.Models
         public int VacancyId { get; set; }
 
         public virtual ICollection<VacancyApplicant> VacancyApplicants { get; set; }
+
+        public virtual ICollection<ApplicantAnswers> ApplicantAnswers { get; set; }
+
+        public virtual ICollection<ApplicantStatus> ApplicantStatus { get; set; }
+
     }
 }

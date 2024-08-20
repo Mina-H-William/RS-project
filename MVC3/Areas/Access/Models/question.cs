@@ -18,5 +18,8 @@ namespace MVC3.Areas.Access.Models
         public bool Active { get; set; }
 
         public string ChooseItems { get; set; }
+
+        public virtual ICollection<ApplicantAnswers> ApplicantAnswers { get; set; }
+
     }
 }

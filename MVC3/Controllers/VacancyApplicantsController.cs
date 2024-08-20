@@ -85,6 +85,19 @@ namespace MVC3.Controllers
                 await _context.AddAsync(vacancyApplicant);
                 await _context.SaveChangesAsync();
 
+                var applicantstatus = new ApplicantStatus()
+                {
+                    ApplicantId = applicant.ApplicantId,
+                    VacancyId = vacancyApplicant.VacancyId,
+                    HR = false,
+                    Technical = false,
+                    Status = "pending"
+
+                };
+                await _context.AddAsync(applicantstatus);
+                await _context.SaveChangesAsync();
+
+
                 return RedirectToAction("Index", "Home");
             }
             ViewData["ApplicantId"] = new SelectList(_context.Applicant, "ApplicantId", "ApplicantId", vacancyApplicant.ApplicantId);

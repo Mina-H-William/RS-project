@@ -144,8 +144,8 @@
                     <td>@Html.DisplayFor(modelItem => item.CertificateName)</td>
                     <td>@Html.DisplayFor(modelItem => item.University)</td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.ApplicantId" class="btn btn-warning btn-sm">Edit</a>
-                        <a asp-action="Details" asp-route-id="@item.ApplicantId" class="btn btn-info btn-sm">Details</a>
+                        @* <a asp-action="Edit" asp-route-id="@item.ApplicantId" class="btn btn-warning btn-sm">Edit</a> *@
+                        <a asp-action="Details" asp-route-id="@item.ApplicantId" class="btn btn-info btn-sm">More Details</a>
                     </td>
                 </tr>
             }

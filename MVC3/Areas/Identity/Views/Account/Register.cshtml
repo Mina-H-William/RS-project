@@ -26,9 +26,14 @@
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SelectedDepartmentIds">Departments</label>
-                <select asp-for="SelectedDepartmentIds" asp-items="Model.Departments" class="form-control" multiple="multiple"></select>
-                <span asp-validation-for="SelectedDepartmentIds" class="text-danger"></span>
+                <label asp-for="SelectedProjectIds">Projects</label>
+                <select asp-for="SelectedProjectIds" asp-items="Model.Projects" class="form-control" multiple="multiple"></select>
+                <span asp-validation-for="SelectedProjectIds" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedDepartmentId">Departments</label>
+                <select asp-for="SelectedDepartmentId" asp-items="Model.Departments" class="form-control"></select>
+                <span asp-validation-for="SelectedDepartmentId" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>

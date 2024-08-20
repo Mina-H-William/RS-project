@@ -1,4 +1,4 @@
-﻿namespace MVC3.Areas.Access.Models
+﻿namespace MVC3.Areas.Access.ViewModels
 {
     public class SubmissionViewModel
     {
@@ -7,5 +7,8 @@
         public int YearsOfExperience { get; set; }
         public string ResumeFilePath { get; set; }
         public int ApplicantId { get; set; }
+        public string HR_Status { get; set; }
+        public string Technical_Status { get; set; }
+
     }
 }

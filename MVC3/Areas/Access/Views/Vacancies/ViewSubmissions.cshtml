@@ -15,6 +15,8 @@
                 <th>Last Name</th>
                 <th>Years of Experience</th>
                 <th>CV</th>
+                <th>HR</th>
+                <th>Technical</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -37,11 +39,12 @@
                             </a>
                         }
                     </td>
+                    <td>@item.HR_Status</td>
+                    <td>@item.Technical_Status</td>
                     <td>
                         @Html.ActionLink("Details", "Details", "Applicants", new { id = item.ApplicantId, toviewsubmission = true })
-                        @Html.ActionLink("HR-Evaluate", "", "", new { id = item.ApplicantId })
-                        @Html.ActionLink("Technical-Evaluate", "", "", new { id = item.ApplicantId })
-
+                        @Html.ActionLink("HR_Evaluate", "HRQuestions", "InterviewEvaluate",
+                        new { area = "Access", applicantid = item.ApplicantId, vid = vid }, null)
                     </td>
                 </tr>
             }

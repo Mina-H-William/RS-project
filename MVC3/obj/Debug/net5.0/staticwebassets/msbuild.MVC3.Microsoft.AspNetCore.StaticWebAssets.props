@@ -4080,6 +4080,22 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery\LICENSE.txt))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\resumes\6cf0a6b6-ed08-4c10-8f61-e6bc9ad04789_Berlitz_Exam.pdf))">
+      <SourceType>Package</SourceType>
+      <SourceId>MVC3</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MVC3</BasePath>
+      <RelativePath>resumes\6cf0a6b6-ed08-4c10-8f61-e6bc9ad04789_Berlitz_Exam.pdf</RelativePath>
+      <AssetKind></AssetKind>
+      <AssetMode></AssetMode>
+      <AssetRole></AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\resumes\6cf0a6b6-ed08-4c10-8f61-e6bc9ad04789_Berlitz_Exam.pdf))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\resumes\c372b192-e30c-4c26-9db5-6cef3413476c_GUC_126_61_37837_2023-11-08T21_00_04.pdf))">
       <SourceType>Package</SourceType>
       <SourceId>MVC3</SourceId>

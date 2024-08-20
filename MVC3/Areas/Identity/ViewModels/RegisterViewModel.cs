@@ -26,10 +26,18 @@ namespace MVC3.Areas.Identity.ViewModels
         public string ConfirmPassword { get; set; }
 
         // For multi-select dropdown
-        public List<int> SelectedDepartmentIds { get; set; } = new List<int>();
+        //public List<int> SelectedDepartmentIds { get; set; } = new List<int>();
+        public int SelectedDepartmentId { get; set; }
+
 
         // To populate the multi-select dropdown
         public IEnumerable<SelectListItem> Departments { get; set; }
+
+        // For multi-select dropdown
+        public List<int> SelectedProjectIds { get; set; } = new List<int>();
+
+        // To populate the multi-select dropdown
+        public IEnumerable<SelectListItem> Projects { get; set; }
 
     }
 }

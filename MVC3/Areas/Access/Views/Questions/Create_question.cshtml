@@ -65,6 +65,11 @@
                 }
             });
 
+            var initialValue = $('#Answer_Type').val();
+            if (initialValue == "Choose") {
+                $('#additional-fields-group').show();
+            }
+
             // Function to add a new field to the disabled field and hidden field list
             function addField() {
                 var newFieldValue = $('#newField').val().trim();
