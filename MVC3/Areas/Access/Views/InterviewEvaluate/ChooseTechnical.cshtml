@@ -1,0 +1,60 @@
+﻿@model ChooseTechnicalViewModel
+
+@{
+    ViewBag.Title = "ChooseTechnical";
+}
+
+<h1>Users found in this Department: @Model.departmentname</h1>
+
+@if (Model.Users.Any())
+{
+
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="width: 30%;">User Name</th>
+                <th>projects</th>
+                <th>Send</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                string projects = "";
+                foreach (var project in user.UserDepartmentProject)
+                {
+                    projects += project.Project.ProjectName;
+                    projects += ",";
+                }
+                projects = (projects.Length > 0) ? projects.Substring(0, projects.Length - 1) : projects;
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@projects</td>
+                    <td>
+                        <form method="post" asp-action="SendToTechnical" asp-controller="InterviewEvaluate" asp-area="Access">
+                            <input asp-for="Applicantid" hidden />
+                            <input asp-for="Vacancyid" hidden />
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                No Users found in this Department
+            </h5>
+        </div>
+    </div>
+}

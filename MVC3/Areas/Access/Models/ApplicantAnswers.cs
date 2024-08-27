@@ -4,15 +4,15 @@
     {
         public int ApplicantId { get; set; }
 
-        public Applicant Applicant { get; set; }
+        public virtual Applicant Applicant { get; set; }
 
         public int VacancyId { get; set; }
 
-        public Vacancy Vacancy { get; set; }
+        public virtual Vacancy Vacancy { get; set; }
 
         public int QuestionId { get; set; }
 
-        public question Question { get; set; }
+        public virtual question Question { get; set; }
 
         public string Answer { get; set; }
     }

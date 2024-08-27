@@ -1,4 +1,4 @@
-﻿using MVC3.Models;
+﻿using MVC3.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

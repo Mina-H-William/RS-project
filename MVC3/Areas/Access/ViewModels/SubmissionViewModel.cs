@@ -9,6 +9,8 @@
         public int ApplicantId { get; set; }
         public string HR_Status { get; set; }
         public string Technical_Status { get; set; }
+        public string Applicant_Status { get; set; }
+        public string TechnicalInterview { get; set; }
 
     }
 }

@@ -226,10 +226,11 @@
 @{
     ViewData["Title"] = "Create";
     var vacancyId = ViewBag.VacancyId as int?;
+    var vacancyname = ViewBag.vacancyname as string;
     var existingApplicantId = ViewBag.ExistingApplicantId;
 }
 
-<h1>Create Applicant for Vacancy @vacancyId</h1>
+<h1>Create Applicant for Vacancy @vacancyname</h1>
 
 <h4>Applicant</h4>
 <hr />

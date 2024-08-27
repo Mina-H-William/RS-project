@@ -41,10 +41,32 @@
                     </td>
                     <td>@item.HR_Status</td>
                     <td>@item.Technical_Status</td>
-                    <td>
-                        @Html.ActionLink("Details", "Details", "Applicants", new { id = item.ApplicantId, toviewsubmission = true })
-                        @Html.ActionLink("HR_Evaluate", "HRQuestions", "InterviewEvaluate",
-                        new { area = "Access", applicantid = item.ApplicantId, vid = vid }, null)
+                    <td class="d-flex flex-row justify-content-around">
+                        <div>
+                            @Html.ActionLink("Details", "Details", "Applicants", new { id = item.ApplicantId, toviewsubmission = true })
+                        </div>
+                        <div>
+                            @if (item.Applicant_Status == "pending" && item.HR_Status != "Done")
+                            {
+                                @Html.ActionLink("HR_Evaluate", "HRQuestions", "InterviewEvaluate",
+                                         new { area = "Access", applicantid = item.ApplicantId, vid = vid }, null)
+                            }
+                            else if (item.Applicant_Status == "pending" && item.HR_Status == "Done")
+                            {
+                                <h6 class="text-bg-secondary tch-tooltip">
+                                    Waiting Technical
+                                    <span class="tooltip-text">@item.TechnicalInterview</span>
+                                </h6>
+                            }
+                            else if (item.Applicant_Status == "Disapproved")
+                            {
+                                <h6 class="text-bg-danger">Dis-approved</h6>
+                            }
+                            else
+                            {
+                                <h6 class="text-bg-success">Approved</h6>
+                            }
+                        </div>
                     </td>
                 </tr>
             }
@@ -84,5 +106,34 @@
         /* Remove margin from the last link */
         .table td a:last-child {
             margin-right: 0;
+        }
+
+    .tch-tooltip {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+        .tch-tooltip span {
+            position: absolute;
+            background-color: #fff;
+            color: #1e90ff;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1;
+        }
+
+        .tch-tooltip:hover span {
+            opacity: 1;
+            visibility: visible;
         }
 </style>

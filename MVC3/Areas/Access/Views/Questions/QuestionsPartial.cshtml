@@ -19,7 +19,7 @@
         <tbody>
             @foreach (var question in Model)
             {
-                <tr class=@(question.Active ?"" : "table-secondary")>
+                <tr class=@(question.Active ? "" : "table-secondary")>
                     <td>@question.Header</td>
                     <td>@question.Answer_Type</td>
                     <td>

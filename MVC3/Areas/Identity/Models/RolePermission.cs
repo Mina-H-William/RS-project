@@ -5,9 +5,9 @@ namespace MVC3.Areas.Identity.Models
     public class RolePermission
     {
         public string RoleId { get; set; }
-        public ApplicationRole Role { get; set; }
+        public virtual ApplicationRole Role { get; set; }
 
         public int PermissionId { get; set; }
-        public Permission Permission { get; set; }
+        public virtual Permission Permission { get; set; }
     }
 }

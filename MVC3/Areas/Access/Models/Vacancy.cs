@@ -39,6 +39,9 @@ namespace MVC3.Areas.Access.Models
 
         public virtual ICollection<ApplicantStatus> ApplicantStatus { get; set; }
 
+        public virtual ICollection<TechnicalInterview> TechnicalInterviews { get; set; }
+
+
 
     }
 }

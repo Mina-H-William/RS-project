@@ -53,8 +53,10 @@ namespace MVC3.Controllers
         }
 
         // GET: New_Applicants/Create
-        public IActionResult Create(int VacancyId)
+        public async Task<IActionResult> Create(int VacancyId)
         {
+            var vacany = await _context.Vacancy.FirstOrDefaultAsync(v=>v.VacancyId == VacancyId);
+            ViewBag.vacancyname = vacany.VacancyName;
             ViewBag.VacancyId = VacancyId;
             ViewBag.Nationalities = new SelectList(_context.Nationalities, "Id", "Name");
             var jsonModel = HttpContext.Session.GetString("applicant");
@@ -125,6 +127,7 @@ namespace MVC3.Controllers
 
                 //_context.Add(applicant);
                 //await _context.SaveChangesAsync();
+
                 return RedirectToAction("Create", "VacancyApplicants", new { vacancyId = VacancyId });
             }
             ViewBag.VacancyId = VacancyId;

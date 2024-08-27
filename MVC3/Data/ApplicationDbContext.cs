@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MVC3.Models;
 using MVC3.Areas.Access.Models;
 using MVC3.Areas.Identity.Models;
 using System;
@@ -19,9 +18,10 @@ namespace MVC3.Data
         {
         }
 
-        public virtual DbSet<ApplicantAnswers> ApplicantAnswers { get; set; }
-        public virtual DbSet<ApplicantStatus> ApplicantStatus { get; set; }
-        public virtual DbSet<UserDepartmentProject> UserDepartmentProject { get; set; }
+        public DbSet<TechnicalInterview> TechnicalInterviews { get; set; }
+        public DbSet<ApplicantAnswers> ApplicantAnswers { get; set; }
+        public DbSet<ApplicantStatus> ApplicantStatus { get; set; }
+        public DbSet<UserDepartmentProject> UserDepartmentProject { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<question> questions { get; set; }
@@ -90,6 +90,17 @@ namespace MVC3.Data
                         j.HasKey(v => new { v.VacancyId, v.ProjectId });
                     }
                 );
+
+            modelBuilder.Entity<Vacancy>()
+                .HasOne(v => v.Title)
+                .WithMany(t => t.Vacancies)
+                .HasForeignKey(v => v.TitleId);
+
+            modelBuilder.Entity<Title>()
+                .HasOne(t => t.Department)
+                .WithMany(d => d.Titles)
+                .HasForeignKey(v => v.DepartmentId);
+
             //Configure VacancyApplicant
             modelBuilder.Entity<VacancyApplicant>(entity =>
             {
@@ -256,6 +267,22 @@ namespace MVC3.Data
                 .HasForeignKey(AA => AA.VacancyId);
 
             //////////////////////
+            ////////// TechnicalInterviews ////////////////
+
+            modelBuilder.Entity<TechnicalInterview>()
+                .HasKey(du => new { du.ApplicantId, du.VacancyId });
+
+            modelBuilder.Entity<TechnicalInterview>()
+                .HasOne(AA => AA.Applicant)
+                .WithMany(A => A.TechnicalInterviews)
+                .HasForeignKey(AA => AA.ApplicantId);
+
+            modelBuilder.Entity<TechnicalInterview>()
+                .HasOne(AA => AA.Vacancy)
+                .WithMany(v => v.TechnicalInterviews)
+                .HasForeignKey(AA => AA.VacancyId);
+
+            //////////////////////////
 
             OnModelCreatingPartial(modelBuilder);
         }

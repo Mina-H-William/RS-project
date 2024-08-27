@@ -303,6 +303,27 @@ namespace MVC3.Migrations
                     b.ToTable("Project");
                 });
 
+            modelBuilder.Entity("MVC3.Areas.Access.Models.TechnicalInterview", b =>
+                {
+                    b.Property<int>("ApplicantId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VacancyId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Done")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("TechnicalInterviewer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ApplicantId", "VacancyId");
+
+                    b.HasIndex("VacancyId");
+
+                    b.ToTable("TechnicalInterviews");
+                });
+
             modelBuilder.Entity("MVC3.Areas.Access.Models.Title", b =>
                 {
                     b.Property<int>("TitleId")
@@ -537,13 +558,13 @@ namespace MVC3.Migrations
                             Id = "1",
                             AccessFailedCount = 0,
                             Active = true,
-                            ConcurrencyStamp = "67da9125-1aba-46ea-beef-a4ec987d2fd2",
+                            ConcurrencyStamp = "d4a3b35e-812b-450d-b9c3-f8c20451c1ee",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFhvuSprD6rcc1iipZm15IBYvnRrRBrxfc3QVYv4WkD2emLoFaXAK5xWKEhjFIZGPA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELPNKawTojth5Tzfwxp2ZZKosH/DAI4pgA81S4LO/DjLN8hNnCa+by4k3bqaH1hJ4Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -829,7 +850,7 @@ namespace MVC3.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "fc35304b-aeca-41df-a0b7-282a889a4de4",
+                            ConcurrencyStamp = "4192ec6d-f822-4c61-8a5f-c160ec716ae4",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -901,6 +922,25 @@ namespace MVC3.Migrations
                         .IsRequired();
 
                     b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("MVC3.Areas.Access.Models.TechnicalInterview", b =>
+                {
+                    b.HasOne("MVC3.Areas.Access.Models.Applicant", "Applicant")
+                        .WithMany("TechnicalInterviews")
+                        .HasForeignKey("ApplicantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVC3.Areas.Access.Models.Vacancy", "Vacancy")
+                        .WithMany("TechnicalInterviews")
+                        .HasForeignKey("VacancyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Applicant");
+
+                    b.Navigation("Vacancy");
                 });
 
             modelBuilder.Entity("MVC3.Areas.Access.Models.Title", b =>
@@ -1072,6 +1112,8 @@ namespace MVC3.Migrations
 
                     b.Navigation("ApplicantStatus");
 
+                    b.Navigation("TechnicalInterviews");
+
                     b.Navigation("VacancyApplicants");
                 });
 
@@ -1109,6 +1151,8 @@ namespace MVC3.Migrations
                     b.Navigation("ApplicantAnswers");
 
                     b.Navigation("ApplicantStatus");
+
+                    b.Navigation("TechnicalInterviews");
 
                     b.Navigation("VacancyProjects");
                 });

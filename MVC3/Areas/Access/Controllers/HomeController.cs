@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using MVC3.Areas.Access.Models;
-using MVC3.Models;
+using MVC3.ViewModels;
 
 namespace MVC3.Areas.Access.Controllers
 {

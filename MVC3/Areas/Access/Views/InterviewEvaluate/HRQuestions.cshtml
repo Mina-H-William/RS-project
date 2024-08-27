@@ -24,23 +24,50 @@
             <!-- Answer Input -->
             @if (Model.Questions[i].AnswerType == "Text")
             {
-                <textarea asp-for="Questions[i].Answer" class="form-control mt-2" rows="1" style="resize: vertical;"></textarea>
+                @if (submit)
+                {
+                    <textarea asp-for="Questions[i].Answer" class="form-control mt-2" rows="1" style="resize: vertical;" disabled></textarea>
+                }
+                else
+                {
+                    <textarea asp-for="Questions[i].Answer" class="form-control mt-2" rows="1" style="resize: vertical;"></textarea>
+                }
             }
             else if (Model.Questions[i].AnswerType == "Choose")
             {
-                <select asp-for="Questions[i].Answer" class="form-control mt-2">
-                    @foreach (var item in Model.Questions[i].ChooseItems)
-                    {
-                        <option value="@item">@item</option>
-                    }
-                </select>
+                @if (submit)
+                {
+                    <select asp-for="Questions[i].Answer" class="form-control mt-2" disabled>
+                        @foreach (var item in Model.Questions[i].ChooseItems)
+                        {
+                            <option value="@item" disabled>@item</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <select asp-for="Questions[i].Answer" class="form-control mt-2">
+                        @foreach (var item in Model.Questions[i].ChooseItems)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+                }
             }
             else if (Model.Questions[i].AnswerType == "Checkbox")
             {
                 <div class="mt-2">
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" asp-for="Questions[i].Answer">
+                        @if (submit)
+                        {
+                            var x = bool.Parse(Model.Questions[i].Answer ?? "false");
+                            <input class="form-check-input" type="checkbox" @(x ? "checked" : "") disabled>
+                        }
+                        else
+                        {
+                            <input class="form-check-input" type="checkbox" asp-for="Questions[i].Answer">
+                        }
                     </div>
                 </div>
             }
@@ -71,6 +98,7 @@
                 <button type="submit" asp-action="DisApprove_HR" class="btn btn-danger">DisApprove</button>
             </div>
             <div>
+                <input asp-for="final_ration" hidden />
                 <h3>Final Rating: @Model.final_ration / 10</h3>
             </div>
         </div>

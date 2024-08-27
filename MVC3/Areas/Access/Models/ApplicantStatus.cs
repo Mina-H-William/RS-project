@@ -4,11 +4,11 @@
     {
         public int ApplicantId { get; set; }
 
-        public Applicant Applicant { get; set; }
+        public virtual Applicant Applicant { get; set; }
 
         public int VacancyId { get; set; }
 
-        public Vacancy Vacancy { get; set; }
+        public virtual Vacancy Vacancy { get; set; }
 
         public bool HR { get; set; }
 

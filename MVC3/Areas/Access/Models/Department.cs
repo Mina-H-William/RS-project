@@ -26,6 +26,6 @@ namespace MVC3.Areas.Access.Models
 
         public virtual ICollection<Title> Titles { get; set; }
 
-        public ICollection<UserDepartmentProject> UserDepartmentProject { get; set; }
+        public virtual ICollection<UserDepartmentProject> UserDepartmentProject { get; set; }
     }
 }

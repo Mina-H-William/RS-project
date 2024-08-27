@@ -8,6 +8,6 @@ namespace MVC3.Areas.Identity.Models
     public class ApplicationUser : IdentityUser
     {
         public bool Active { get; set; } = true;
-        public ICollection<UserDepartmentProject> UserDepartmentProject { get; set; }
+        public virtual ICollection<UserDepartmentProject> UserDepartmentProject { get; set; }
     }
 }

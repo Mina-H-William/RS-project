@@ -20,18 +20,12 @@ using MVC3
     ;
 #nullable restore
 #line 2 "D:\RS-project\MVC3\Views\_ViewImports.cshtml"
-using MVC3.Models
-
-#nullable disable
-    ;
-#nullable restore
-#line 3 "D:\RS-project\MVC3\Views\_ViewImports.cshtml"
 using MVC3.Areas.Access.Models
 
 #nullable disable
     ;
 #nullable restore
-#line 4 "D:\RS-project\MVC3\Views\_ViewImports.cshtml"
+#line 3 "D:\RS-project\MVC3\Views\_ViewImports.cshtml"
 using MVC3.ViewModels
 
 #line default
@@ -39,7 +33,7 @@ using MVC3.ViewModels
 #nullable disable
     ;
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c", @"/Views/VacancyApplicants/Create.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"d259f7c13c13f7ee8d95791ff1b9d9fde0f838b88391073e1611469cd461365e", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"8dc9659427e2c713f10144719b8838a22cef8bafb1d4348e16cd674cc2b93e2c", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_VacancyApplicants_Create : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<VacancyApplicant>
     #nullable disable
@@ -92,9 +86,9 @@ using MVC3.ViewModels
 #nullable disable
 
             WriteLiteral("\r\n<h1>Create Vacancy Applicant</h1>\r\n\r\n<h4>Vacancy Applicant Details</h4>\r\n<hr />\r\n<div class=\"row\">\r\n    <div class=\"col-md-4\">\r\n        ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c6389", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c6267", async() => {
                 WriteLiteral("\r\n            ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c6683", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c6561", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper>();
@@ -142,7 +136,7 @@ using MVC3.ViewModels
                 , 565, 20, false);
                 EndWriteAttribute();
                 WriteLiteral(" />\r\n\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Expected Salary</label>\r\n                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c9594", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c9472", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -166,7 +160,7 @@ using MVC3.ViewModels
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("span", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c11259", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("span", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c11137", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationMessageTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationMessageTagHelper>();
@@ -190,7 +184,7 @@ using MVC3.ViewModels
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">How Did You Hear About This Vacancy?</label>\r\n                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c13170", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c13048", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -214,7 +208,7 @@ using MVC3.ViewModels
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("span", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c14838", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("span", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c14716", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationMessageTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationMessageTagHelper>();
@@ -238,7 +232,7 @@ using MVC3.ViewModels
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Have You Worked at This Company Before?</label>\r\n                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c16754", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c16632", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -262,7 +256,7 @@ using MVC3.ViewModels
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("span", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c18419", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("span", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c18297", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationMessageTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationMessageTagHelper>();
@@ -286,7 +280,7 @@ using MVC3.ViewModels
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Do You Have Any Relatives at This Company?</label>\r\n                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c20335", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c20213", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -310,7 +304,7 @@ using MVC3.ViewModels
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("span", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c22004", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("span", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c21882", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationMessageTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationMessageTagHelper>();
@@ -334,7 +328,7 @@ using MVC3.ViewModels
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
                 WriteLiteral("\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Location</label>\r\n                ");
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("select", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c23890", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("select", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c23768", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_SelectTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.SelectTagHelper>();
@@ -384,7 +378,7 @@ using MVC3.ViewModels
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n    </div>\r\n</div>\r\n\r\n<div>\r\n    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c27497", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4ab0ff419d20f65d3d2f02093c59d858fdfb36f6b8da3b9f801779d20d1e216c27375", async() => {
                 WriteLiteral("Back to Applicant Details");
             }
             );

@@ -1551,7 +1551,6 @@ D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\New_Applicants\Create.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
-D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
@@ -1630,3 +1629,6 @@ D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Access\Views\Questions\Questions
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Access\Views\Questions\Create_question.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Identity\Views\Adminstration\EditUser.cshtml.g.cs
 D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Access\Views\InterviewEvaluate\HRQuestions.cshtml.g.cs
+D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Access\Views\InterviewEvaluate\ChooseTechnical.cshtml.g.cs
+D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Access\Views\TechnicalInterview\Index.cshtml.g.cs
+D:\RS-project\MVC3\obj\Debug\net5.0\Razor\Areas\Access\Views\TechnicalInterview\TechnicalQuestions.cshtml.g.cs

@@ -32,7 +32,7 @@ namespace MVC3.Areas.Access.Controllers
                 .Include(v => v.VacancyProjects)
                     .ThenInclude(vp => vp.Project);
 
-            return View(await applicationDbContext.ToListAsync());
+            return View(await applicationDbContext.ToListAsync());  
         }
 
         // GET: Vacancies/Details/5
@@ -319,7 +319,12 @@ namespace MVC3.Areas.Access.Controllers
 
             foreach (var sub in submissions)
             {
-                var applicantstatus = _context.ApplicantStatus.Find(sub.ApplicantId, Id);
+                var applicantstatus = await _context.ApplicantStatus.FindAsync(sub.ApplicantId, Id);
+                
+                var technicalinterviewer =  await _context.TechnicalInterviews
+                                            .Where(ti=>ti.ApplicantId == sub.ApplicantId &&
+                                            ti.VacancyId == Id).Select(ti=>ti.TechnicalInterviewer).FirstOrDefaultAsync();
+
                 var subview = new SubmissionViewModel()
                 {
                     ApplicantFirstName = sub.ApplicantFirstName,
@@ -328,7 +333,9 @@ namespace MVC3.Areas.Access.Controllers
                     YearsOfExperience = sub.YearsOfExperience,
                     ResumeFilePath = sub.ResumeFilePath,
                     HR_Status = (applicantstatus.HR) ? "Done" : "Waiting",
-                    Technical_Status = (applicantstatus.Technical) ? "Done" : "Waiting"
+                    Technical_Status = (applicantstatus.Technical) ? "Done" : "Waiting",
+                    Applicant_Status = applicantstatus.Status,
+                    TechnicalInterview = technicalinterviewer
                 };
                 submissionsview.Add(subview);
             }

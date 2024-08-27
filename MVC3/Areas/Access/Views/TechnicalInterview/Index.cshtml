@@ -1,0 +1,96 @@
+﻿@model List<TechnicalInteviewViewModel>
+
+@if (Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Years of Experience</th>
+                    <th>CV</th>
+                    <th>Vacancy Name</th>
+                    <th>Title</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Applicant.ApplicantFirstName</td>
+                        <td>@item.Applicant.ApplicantLastName</td>
+                        <td>@item.Applicant.YearsOfExperience</td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.Applicant.ResumeFilePath))
+                            {
+                                <a href="@Url.Content(item.Applicant.ResumeFilePath)" target="_blank">View CV</a>
+                            }
+                            else
+                            {
+                                <a>
+                                    No CV Available
+                                </a>
+                            }
+                        </td>
+                        <td>@item.Vacancy.VacancyName</td>
+                        <td>@item.Vacancy.Title.TitleName</td>
+                        <td>
+                            @if (!item.Done)
+                            {   
+                            <a class="btn btn-primary" asp-action="TechnicalQuestions" asp-controller="TechnicalInterview"
+                                    asp-route-applicantid="@item.Applicantid" asp-route-vacancyid="@item.Vacancyid">
+                                Technical Evaluate
+                                </a>
+                            }
+                            else
+                            {
+                                <h5>Completed</h5>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <h2>No Interviews are available</h2>
+}
+
+<style>
+    .table-responsive {
+        overflow-x: auto;
+        overflow-y: auto; /* Add vertical overflow */
+        max-height: 600px; /* Adjust height as needed */
+    }
+
+    .table {
+        border-collapse: collapse; /* Ensure borders and spacing are consistent */
+        width: 100%;
+    }
+
+    thead th {
+        position: sticky;
+        top: 0;
+        background-color: #f9f9f9; /* Adjust background color */
+        z-index: 2; /* Ensure headers are above other content */
+        border-bottom: 2px solid #ddd; /* Optional: add a border for visual separation */
+    }
+
+    tbody td {
+        white-space: nowrap; /* Prevent text wrapping */
+    }
+
+    /* Add spacing between action links */
+    .table td a {
+        margin-right: 10px; /* Adjust this value as needed */
+    }
+
+        /* Remove margin from the last link */
+        .table td a:last-child {
+            margin-right: 0;
+        }
+</style>

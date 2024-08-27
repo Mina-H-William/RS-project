@@ -20,18 +20,12 @@ using MVC3
     ;
 #nullable restore
 #line 2 "D:\RS-project\MVC3\Views\_ViewImports.cshtml"
-using MVC3.Models
-
-#nullable disable
-    ;
-#nullable restore
-#line 3 "D:\RS-project\MVC3\Views\_ViewImports.cshtml"
 using MVC3.Areas.Access.Models
 
 #nullable disable
     ;
 #nullable restore
-#line 4 "D:\RS-project\MVC3\Views\_ViewImports.cshtml"
+#line 3 "D:\RS-project\MVC3\Views\_ViewImports.cshtml"
 using MVC3.ViewModels
 
 #line default
@@ -39,7 +33,7 @@ using MVC3.ViewModels
 #nullable disable
     ;
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"41dd9f0bcf26c8fcc0dd1e270b481d6f47294adf413ba777360926ca796ae989", @"/Views/Active_Vacancies/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"d259f7c13c13f7ee8d95791ff1b9d9fde0f838b88391073e1611469cd461365e", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"Sha256", @"8dc9659427e2c713f10144719b8838a22cef8bafb1d4348e16cd674cc2b93e2c", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Active_Vacancies_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<activeVacanciesViewModel>>
     #nullable disable
@@ -170,7 +164,7 @@ else
 #nullable disable
 
             WriteLiteral("            </p>\r\n            <p><strong>Status:</strong>Active</p>\r\n            <p>\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "41dd9f0bcf26c8fcc0dd1e270b481d6f47294adf413ba777360926ca796ae9896601", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "41dd9f0bcf26c8fcc0dd1e270b481d6f47294adf413ba777360926ca796ae9896479", async() => {
                 WriteLiteral("Apply");
             }
             );

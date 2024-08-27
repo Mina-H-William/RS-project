@@ -5,6 +5,6 @@ namespace MVC3.Areas.Identity.Models
 {
     public class ApplicationRole : IdentityRole
     {
-        public ICollection<RolePermission> RolePermissions { get; set; }
+        public virtual ICollection<RolePermission> RolePermissions { get; set; }
     }
 }
